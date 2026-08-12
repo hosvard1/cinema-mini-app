@@ -1,316 +1,192 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        content="width=device-width, initial-scale=1.0"
     >
 
-    <meta
-        name="theme-color"
-        content="#08090d"
-    >
-
-    <title>Cinema — Movie Tickets</title>
+    <title>Cinema</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <header class="header">
+<header class="header">
 
-        <div class="header-container">
+    <div class="logo">
+        CINEMA
+    </div>
 
-            <a href="#" class="logo" aria-label="Cinema home">
-                CINEMA
-            </a>
+    <div class="user">
+        <span class="user-icon">👤</span>
+        <span id="username">User</span>
+    </div>
 
-            <div class="user">
-                <div class="user-avatar">
-                    <span>👤</span>
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <span class="badge">
+                NOW SHOWING
+            </span>
+
+            <h1>
+                Avatar
+            </h1>
+
+            <p>
+                Experience the movie on the big screen.
+            </p>
+
+            <button
+                type="button"
+                onclick="openMovie()"
+            >
+                Buy Ticket
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- MOVIES -->
+
+    <section class="movies">
+
+        <h2>
+            Movies
+        </h2>
+
+
+        <div class="movie-card">
+
+            <div class="movie-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba"
+                    alt="Cinema"
+                >
+
+            </div>
+
+
+            <div class="movie-info">
+
+                <h3>
+                    Avatar
+                </h3>
+
+                <p>
+                    Action · Adventure · Sci-Fi
+                </p>
+
+
+                <div class="sessions">
+
+                    <button
+                        type="button"
+                        onclick="selectSession('18:00')"
+                    >
+                        18:00
+                    </button>
+
+                    <button
+                        type="button"
+                        onclick="selectSession('20:30')"
+                    >
+                        20:30
+                    </button>
+
+                    <button
+                        type="button"
+                        onclick="selectSession('23:00')"
+                    >
+                        23:00
+                    </button>
+
                 </div>
 
-                <div class="user-info">
-                    <span class="user-label">Welcome</span>
-                    <strong id="username">User</strong>
-                </div>
             </div>
 
         </div>
 
-    </header>
+    </section>
 
 
-    <!-- MAIN -->
-    <main>
+    <!-- SEATS -->
 
-        <!-- HERO -->
-        <section class="hero">
+    <section
+        id="seats-section"
+        class="seats-section hidden"
+    >
 
-            <div class="hero-overlay"></div>
+        <h2>
+            Select your seats
+        </h2>
 
-            <div class="hero-content">
 
-                <span class="badge">
-                    NOW SHOWING
-                </span>
+        <div class="screen">
+            SCREEN
+        </div>
 
-                <h1>Avatar</h1>
 
-                <p class="hero-description">
-                    Experience Avatar like never before.
-                    Watch it on the big screen with premium sound
-                    and an unforgettable cinematic atmosphere.
-                </p>
+        <div
+            id="seats"
+            class="seats"
+        ></div>
 
-                <div class="hero-meta">
-                    <span>2026</span>
-                    <span>•</span>
-                    <span>2h 42m</span>
-                    <span>•</span>
-                    <span>PG-13</span>
-                </div>
 
-                <button
-                    class="primary-button"
-                    type="button"
-                    onclick="openMovie()"
-                >
-                    <span>Buy Ticket</span>
-                    <span class="button-arrow">→</span>
-                </button>
+        <div class="summary">
 
-            </div>
+            <p>
+                Seats:
+                <strong id="selected-seats">
+                    —
+                </strong>
+            </p>
 
-        </section>
+            <p>
+                Total:
+                <strong id="total">
+                    0 ⭐
+                </strong>
+            </p>
 
+            <button
+                id="pay-button"
+                type="button"
+                onclick="pay()"
+                disabled
+            >
+                ⭐ Pay
+            </button>
 
-        <!-- MOVIES -->
-        <section class="movies">
+        </div>
 
-            <div class="section-header">
+    </section>
 
-                <div>
-                    <span class="section-label">
-                        DISCOVER
-                    </span>
+</main>
 
-                    <h2>Now Showing</h2>
-                </div>
 
-            </div>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-
-            <!-- MOVIE CARD -->
-            <article class="movie-card">
-
-                <div class="movie-poster">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba"
-                        alt="Cinema movie theater"
-                        loading="lazy"
-                    >
-
-                    <div class="poster-gradient"></div>
-
-                </div>
-
-
-                <div class="movie-info">
-
-                    <div class="movie-heading">
-
-                        <div>
-                            <span class="movie-category">
-                                FEATURED MOVIE
-                            </span>
-
-                            <h3>Avatar</h3>
-                        </div>
-
-                        <span class="rating">
-                            ★ 8.9
-                        </span>
-
-                    </div>
-
-
-                    <p class="movie-description">
-                        An epic cinematic adventure filled with
-                        breathtaking visuals, action and unforgettable
-                        characters.
-                    </p>
-
-
-                    <div class="movie-meta">
-
-                        <span>Action</span>
-                        <span>Adventure</span>
-                        <span>Sci-Fi</span>
-
-                    </div>
-
-
-                    <!-- SESSIONS -->
-                    <div class="sessions-wrapper">
-
-                        <span class="sessions-title">
-                            Select showtime
-                        </span>
-
-                        <div class="sessions">
-
-                            <button
-                                type="button"
-                                onclick="selectSession('18:00')"
-                            >
-                                <span>18:00</span>
-                            </button>
-
-                            <button
-                                type="button"
-                                onclick="selectSession('20:30')"
-                            >
-                                <span>20:30</span>
-                            </button>
-
-                            <button
-                                type="button"
-                                onclick="selectSession('23:00')"
-                            >
-                                <span>23:00</span>
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        </section>
-
-
-        <!-- SEAT SELECTION -->
-        <section
-            id="seats-section"
-            class="seats-section hidden"
-        >
-
-            <div class="section-header">
-
-                <div>
-                    <span class="section-label">
-                        YOUR EXPERIENCE
-                    </span>
-
-                    <h2>Select your seats</h2>
-                </div>
-
-            </div>
-
-
-            <!-- SCREEN -->
-            <div class="screen-container">
-
-                <div class="screen">
-                    <span>SCREEN</span>
-                </div>
-
-            </div>
-
-
-            <!-- SEAT LEGEND -->
-            <div class="seat-legend">
-
-                <div class="legend-item">
-                    <span class="legend-seat available"></span>
-                    <span>Available</span>
-                </div>
-
-                <div class="legend-item">
-                    <span class="legend-seat selected"></span>
-                    <span>Selected</span>
-                </div>
-
-                <div class="legend-item">
-                    <span class="legend-seat occupied"></span>
-                    <span>Occupied</span>
-                </div>
-
-            </div>
-
-
-            <!-- SEATS -->
-            <div
-                id="seats"
-                class="seats"
-                aria-label="Cinema seats"
-            ></div>
-
-
-            <!-- SUMMARY -->
-            <div class="summary">
-
-                <div class="summary-info">
-
-                    <div class="summary-item">
-
-                        <span class="summary-label">
-                            Selected seats
-                        </span>
-
-                        <strong id="selected-seats">
-                            —
-                        </strong>
-
-                    </div>
-
-
-                    <div class="summary-item">
-
-                        <span class="summary-label">
-                            Total
-                        </span>
-
-                        <strong id="total">
-                            0 ⭐
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    id="pay-button"
-                    class="pay-button"
-                    type="button"
-                    onclick="pay()"
-                    disabled
-                >
-                    <span>⭐</span>
-                    <span>Pay</span>
-                </button>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- TELEGRAM WEB APP -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-    <!-- APP SCRIPT -->
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
+
 </html>
+```
