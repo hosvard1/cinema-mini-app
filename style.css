@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
+```css
 * {
     margin: 0;
     padding: 0;
@@ -7,708 +6,823 @@
 }
 
 html {
-    width: 100%;
-    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 body {
-    width: 100%;
-    min-width: 0;
+    min-height: 100vh;
+    background: #08090d;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
     overflow-x: hidden;
-
-    background: #08090c;
-    color: #fff;
-
-    font-family: "Inter", sans-serif;
-    -webkit-font-smoothing: antialiased;
 }
 
 
-/* =========================================
+/* =========================
    HEADER
-========================================= */
+========================= */
 
 .header {
     width: 100%;
-    height: 60px;
-
-    padding: 0 16px;
+    height: 72px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    padding: 0 7%;
 
-    background: rgba(8, 9, 12, 0.88);
+    background: rgba(8, 9, 13, 0.88);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    position: relative;
+    z-index: 10;
 
-    border-bottom: 1px solid rgba(255,255,255,.07);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 }
 
 .logo {
-    font-size: 15px;
+    color: #ffffff;
+    font-size: 20px;
     font-weight: 800;
-    letter-spacing: 1.8px;
-
-    white-space: nowrap;
+    letter-spacing: 4px;
 }
 
 .user {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 9px;
 
-    min-width: 0;
-
-    color: #b9bbc2;
-
-    font-size: 12px;
-    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
 }
 
-#username {
-    max-width: 100px;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-
-/* =========================================
-   HERO
-========================================= */
-
-.hero {
-    position: relative;
-
-    width: 100%;
-    min-height: 470px;
+.user-icon {
+    width: 34px;
+    height: 34px;
 
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
 
-    overflow: hidden;
+    border-radius: 50%;
 
-    background-image:
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 620px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    background:
         linear-gradient(
-            to bottom,
-            rgba(8,9,12,0.05) 0%,
-            rgba(8,9,12,0.15) 35%,
-            rgba(8,9,12,0.85) 82%,
-            #08090c 100%
+            90deg,
+            rgba(8, 9, 13, 0.98) 0%,
+            rgba(8, 9, 13, 0.82) 35%,
+            rgba(8, 9, 13, 0.35) 70%,
+            rgba(8, 9, 13, 0.9) 100%
         ),
-        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba");
+        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba")
+        center / cover no-repeat;
+}
 
-    background-size: cover;
-    background-position: center;
+.hero::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 180px;
+
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        #08090d
+    );
+
+    pointer-events: none;
 }
 
 .hero-content {
-    width: 100%;
-    min-width: 0;
+    width: min(650px, 86%);
 
-    padding: 30px 16px 32px;
+    margin-left: 7%;
+
+    position: relative;
+    z-index: 2;
 }
 
 .badge {
-    display: inline-flex;
+    display: inline-block;
 
-    padding: 6px 9px;
+    margin-bottom: 20px;
+    padding: 8px 13px;
 
-    margin-bottom: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 50px;
 
-    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.07);
 
-    background: rgba(255,255,255,.10);
-    border: 1px solid rgba(255,255,255,.12);
+    color: rgba(255, 255, 255, 0.8);
 
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 1px;
-
-    backdrop-filter: blur(10px);
+    letter-spacing: 2px;
 }
 
 .hero h1 {
-    max-width: 100%;
-
-    font-size: clamp(38px, 13vw, 64px);
-    line-height: .95;
+    font-size: clamp(52px, 8vw, 100px);
+    line-height: 0.95;
 
     font-weight: 800;
-    letter-spacing: -2px;
+    letter-spacing: -4px;
 
-    overflow-wrap: anywhere;
-
-    margin-bottom: 12px;
+    margin-bottom: 22px;
 }
 
 .hero p {
-    width: 100%;
-    max-width: 320px;
+    max-width: 500px;
 
-    color: #b8bac0;
+    color: rgba(255, 255, 255, 0.68);
 
-    font-size: 13px;
-    line-height: 1.55;
+    font-size: 17px;
+    line-height: 1.7;
 
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .hero button {
-    width: 100%;
-    max-width: 100%;
+    border: none;
+    outline: none;
 
-    min-height: 48px;
+    padding: 15px 25px;
 
-    border: 0;
-    border-radius: 11px;
+    border-radius: 12px;
 
-    background: #fff;
-    color: #08090c;
+    background: #ffffff;
+    color: #08090d;
 
-    font-family: inherit;
-
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
 
     cursor: pointer;
 
-    -webkit-tap-highlight-color: transparent;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.hero button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 35px rgba(255, 255, 255, 0.18);
+}
+
+.hero button:active {
+    transform: scale(0.97);
 }
 
 
-/* =========================================
+/* =========================
    MOVIES
-========================================= */
+========================= */
 
 .movies {
-    width: 100%;
+    width: min(1100px, 86%);
 
-    padding: 28px 16px 35px;
+    margin: 0 auto;
+
+    padding: 80px 0;
 }
 
-.movies h2 {
-    font-size: 21px;
+.movies h2,
+.seats-section h2 {
+    font-size: 32px;
     font-weight: 700;
-    letter-spacing: -.5px;
 
-    margin-bottom: 15px;
+    margin-bottom: 30px;
+    letter-spacing: -1px;
 }
 
 
-/* =========================================
+/* =========================
    MOVIE CARD
-========================================= */
+========================= */
 
 .movie-card {
     width: 100%;
-    min-width: 0;
+
+    display: grid;
+    grid-template-columns: 300px 1fr;
 
     overflow: hidden;
 
-    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
 
-    background: #111318;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.055),
+            rgba(255, 255, 255, 0.015)
+        );
 
-    border: 1px solid rgba(255,255,255,.07);
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.35);
 }
 
-.movie-card img {
-    display: block;
+.movie-image {
+    min-height: 330px;
+}
 
+.movie-image img {
     width: 100%;
-    height: 190px;
+    height: 100%;
+
+    display: block;
 
     object-fit: cover;
 }
 
 .movie-info {
-    width: 100%;
-    min-width: 0;
+    padding: 38px;
 
-    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .movie-info h3 {
-    font-size: 18px;
-    font-weight: 700;
-
-    margin-bottom: 6px;
+    font-size: 34px;
+    margin-bottom: 10px;
 }
 
 .movie-info > p {
-    color: #858992;
+    color: rgba(255, 255, 255, 0.55);
 
-    font-size: 11px;
+    font-size: 14px;
 
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 
-/* =========================================
+/* =========================
    SESSIONS
-========================================= */
+========================= */
 
 .sessions {
-    width: 100%;
-
     display: flex;
-    gap: 7px;
+    flex-wrap: wrap;
 
-    overflow-x: auto;
-
-    padding-bottom: 2px;
-
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-}
-
-.sessions::-webkit-scrollbar {
-    display: none;
+    gap: 10px;
 }
 
 .sessions button {
-    flex: 0 0 auto;
+    min-width: 85px;
 
-    min-width: 68px;
-    height: 40px;
+    padding: 13px 17px;
 
-    padding: 0 11px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
 
-    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
 
-    border: 1px solid rgba(255,255,255,.08);
-
-    background: #181a20;
-    color: #fff;
-
-    font-family: inherit;
-
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 600;
-
-    -webkit-tap-highlight-color: transparent;
-}
-
-
-/* =========================================
-   SEATS SECTION
-========================================= */
-
-.seats-section {
-    width: 100%;
-
-    padding: 5px 16px 40px;
-}
-
-.seats-section h2 {
-    font-size: 20px;
-    font-weight: 700;
-
-    margin-bottom: 20px;
-}
-
-
-/* =========================================
-   SCREEN
-========================================= */
-
-.screen {
-    width: min(80%, 320px);
-    height: 3px;
-
-    margin: 0 auto 35px;
-
-    border-radius: 100px;
-
-    background: #fff;
-
-    box-shadow: 0 0 18px rgba(255,255,255,.3);
-
-    font-size: 0;
-}
-
-
-/* =========================================
-   SEATS
-========================================= */
-
-.seats {
-    width: 100%;
-    max-width: 390px;
-
-    margin: 0 auto 30px;
-
-    display: grid;
-
-    /*
-       8 seats per row
-       automatically shrinks
-    */
-    grid-template-columns: repeat(8, minmax(0, 1fr));
-
-    gap: clamp(5px, 2vw, 9px);
-}
-
-.seat {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-
-    min-width: 0;
-
-    border-radius: 4px;
-
-    background: #252830;
-
-    border: 1px solid rgba(255,255,255,.05);
 
     cursor: pointer;
 
     transition:
-        transform .15s ease,
-        background .15s ease;
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 
-.seat.selected {
-    background: #fff;
+.sessions button:hover {
+    background: rgba(255, 255, 255, 0.12);
 
-    box-shadow:
-        0 0 12px rgba(255,255,255,.25);
+    border-color: rgba(255, 255, 255, 0.3);
+
+    transform: translateY(-2px);
 }
 
-.seat.occupied {
-    background: #3a3c43;
-
-    opacity: .3;
-
-    pointer-events: none;
+.sessions button:active {
+    transform: scale(0.96);
 }
 
 
-/* =========================================
-   SUMMARY
-========================================= */
+/* =========================
+   SEATS SECTION
+========================= */
 
-.summary {
-    width: 100%;
-    max-width: 390px;
+.seats-section {
+    width: min(1000px, 86%);
 
     margin: 0 auto;
 
-    padding: 16px;
-
-    border-radius: 15px;
-
-    background: #111318;
-
-    border: 1px solid rgba(255,255,255,.07);
+    padding: 60px 0 100px;
 }
 
-.summary p {
+.hidden {
+    display: none;
+}
+
+
+/* =========================
+   SCREEN
+========================= */
+
+.screen {
+    width: min(600px, 85%);
+
+    height: 8px;
+
+    margin: 0 auto 55px;
+
+    border-radius: 100px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 25px rgba(255, 255, 255, 0.25),
+        0 0 60px rgba(255, 255, 255, 0.08);
+
+    color: transparent;
+
+    position: relative;
+}
+
+.screen::after {
+    content: "SCREEN";
+
+    position: absolute;
+
+    left: 50%;
+    top: 20px;
+
+    transform: translateX(-50%);
+
+    color: rgba(255, 255, 255, 0.3);
+
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+
+/* =========================
+   SEATS
+========================= */
+
+.seats {
     width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(8, minmax(25px, 1fr));
+
+    gap: 12px;
+
+    max-width: 700px;
+
+    margin: 0 auto 50px;
+}
+
+.seat {
+    aspect-ratio: 1 / 1;
+
+    border-radius: 7px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.seat:hover {
+    transform: translateY(-3px);
+
+    background: rgba(255, 255, 255, 0.17);
+
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.seat.selected {
+    background: #ffffff;
+
+    border-color: #ffffff;
+
+    box-shadow:
+        0 5px 20px rgba(255, 255, 255, 0.18);
+}
+
+.seat.occupied {
+    background: rgba(255, 255, 255, 0.025);
+
+    border-color: rgba(255, 255, 255, 0.04);
+
+    cursor: not-allowed;
+
+    opacity: 0.35;
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+.summary {
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    padding: 22px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    gap: 15px;
+    gap: 20px;
 
-    color: #888b94;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
 
-    font-size: 12px;
+    background: rgba(255, 255, 255, 0.04);
+}
 
-    margin-bottom: 11px;
+.summary p {
+    color: rgba(255, 255, 255, 0.5);
+
+    font-size: 13px;
 }
 
 .summary strong {
-    color: #fff;
+    color: #ffffff;
 
-    font-weight: 600;
-
-    text-align: right;
-
-    overflow-wrap: anywhere;
+    margin-left: 5px;
 }
 
 #pay-button {
-    width: 100%;
-    min-height: 48px;
+    border: none;
 
-    margin-top: 5px;
+    padding: 13px 24px;
 
-    border: 0;
     border-radius: 10px;
 
-    background: #fff;
-    color: #08090c;
+    background: #ffffff;
+    color: #08090d;
 
-    font-family: inherit;
-
-    font-size: 13px;
     font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+#pay-button:not(:disabled):hover {
+    transform: translateY(-2px);
 }
 
 #pay-button:disabled {
-    opacity: .35;
+    opacity: 0.3;
+
+    cursor: not-allowed;
 }
 
 
-/* =========================================
-   HIDDEN
-========================================= */
+/* =========================
+   TABLET
+========================= */
 
-.hidden {
-    display: none !important;
-}
-
-
-/* =========================================
-   VERY SMALL PHONES
-   320px - 359px
-========================================= */
-
-@media (max-width: 359px) {
+@media (max-width: 800px) {
 
     .header {
-        padding: 0 12px;
-    }
-
-    .logo {
-        font-size: 14px;
-    }
-
-    .user {
-        font-size: 11px;
-    }
-
-    #username {
-        max-width: 75px;
+        padding: 0 5%;
     }
 
     .hero {
-        min-height: 430px;
+        min-height: 560px;
+
+        background-position: center;
     }
 
     .hero-content {
-        padding: 25px 13px 27px;
-    }
-
-    .hero h1 {
-        font-size: 38px;
-    }
-
-    .hero button {
-        min-height: 46px;
+        margin-left: 5%;
+        width: 90%;
     }
 
     .movies,
     .seats-section {
-        padding-left: 13px;
-        padding-right: 13px;
+        width: 90%;
     }
 
-    .movie-card img {
-        height: 165px;
+    .movie-card {
+        grid-template-columns: 220px 1fr;
     }
 
     .movie-info {
-        padding: 14px;
+        padding: 28px;
     }
 
+    .movie-info h3 {
+        font-size: 28px;
+    }
+
+    .seats {
+        gap: 9px;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .header {
+        height: 64px;
+
+        padding:
+            0 18px;
+    }
+
+    .logo {
+        font-size: 17px;
+        letter-spacing: 3px;
+    }
+
+    .user {
+        font-size: 12px;
+    }
+
+    .user-icon {
+        width: 30px;
+        height: 30px;
+
+        font-size: 13px;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        min-height: 500px;
+
+        align-items: flex-end;
+
+        padding-bottom: 65px;
+
+        background:
+            linear-gradient(
+                to bottom,
+                rgba(8, 9, 13, 0.2) 0%,
+                rgba(8, 9, 13, 0.65) 45%,
+                #08090d 100%
+            ),
+            url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba")
+            center / cover no-repeat;
+    }
+
+    .hero-content {
+        width: calc(100% - 36px);
+
+        margin: 0 18px;
+    }
+
+    .badge {
+        margin-bottom: 15px;
+
+        padding: 7px 11px;
+
+        font-size: 9px;
+    }
+
+    .hero h1 {
+        font-size: 54px;
+
+        letter-spacing: -2px;
+
+        margin-bottom: 15px;
+    }
+
+    .hero p {
+        font-size: 14px;
+
+        line-height: 1.55;
+
+        margin-bottom: 22px;
+    }
+
+    .hero button {
+        width: 100%;
+
+        padding: 15px;
+    }
+
+
+    /* MOVIES */
+
+    .movies {
+        width: calc(100% - 36px);
+
+        padding: 55px 0;
+    }
+
+    .movies h2,
+    .seats-section h2 {
+        font-size: 27px;
+
+        margin-bottom: 20px;
+    }
+
+
+    /* MOVIE CARD */
+
+    .movie-card {
+        display: block;
+
+        border-radius: 16px;
+    }
+
+    .movie-image {
+        height: 210px;
+
+        min-height: 0;
+    }
+
+    .movie-info {
+        padding: 22px;
+    }
+
+    .movie-info h3 {
+        font-size: 26px;
+
+        margin-bottom: 8px;
+    }
+
+    .movie-info > p {
+        font-size: 13px;
+
+        line-height: 1.5;
+
+        margin-bottom: 22px;
+    }
+
+
+    /* SESSIONS */
+
     .sessions {
-        gap: 5px;
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 7px;
     }
 
     .sessions button {
-        min-width: 62px;
-        height: 38px;
-        padding: 0 8px;
+        width: 100%;
+
+        min-width: 0;
+
+        padding: 12px 5px;
+
+        font-size: 12px;
+    }
+
+
+    /* SEATS */
+
+    .seats-section {
+        width: calc(100% - 36px);
+
+        padding: 40px 0 70px;
+    }
+
+    .screen {
+        width: 90%;
+
+        height: 5px;
+
+        margin-bottom: 45px;
+    }
+
+    .screen::after {
+        top: 15px;
+
+        font-size: 8px;
+    }
+
+    .seats {
+        width: 100%;
+
+        grid-template-columns: repeat(8, 1fr);
+
+        gap: 6px;
+
+        margin-bottom: 35px;
+    }
+
+    .seat {
+        border-radius: 5px;
+    }
+
+
+    /* SUMMARY */
+
+    .summary {
+        padding: 16px;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 14px;
+    }
+
+    .summary p {
+        font-size: 12px;
+    }
+
+    #pay-button {
+        width: 100%;
+
+        padding: 14px;
+    }
+
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 380px) {
+
+    .hero h1 {
+        font-size: 46px;
+    }
+
+    .hero p {
+        font-size: 13px;
+    }
+
+    .movies,
+    .seats-section {
+        width: calc(100% - 28px);
+    }
+
+    .sessions button {
+        font-size: 11px;
+
+        padding: 11px 3px;
     }
 
     .seats {
         gap: 4px;
     }
 
-    .seat {
-        border-radius: 3px;
+    .summary {
+        border-radius: 13px;
     }
+
 }
 
 
-/* =========================================
-   NORMAL PHONES
-   360px - 599px
-========================================= */
+/* =========================
+   VERY SMALL HEIGHT
+========================= */
 
-@media (min-width: 360px) and (max-width: 599px) {
+@media (max-height: 650px) and (max-width: 600px) {
 
     .hero {
-        min-height: 500px;
+        min-height: 430px;
     }
 
-    .hero-content {
-        padding: 35px 18px;
-    }
-
-    .hero button {
-        max-width: 260px;
-    }
-
-    .movies,
-    .seats-section {
-        padding-left: 18px;
-        padding-right: 18px;
-    }
-
-    .movie-card img {
-        height: 210px;
-    }
 }
-
-
-/* =========================================
-   TABLET
-========================================= */
-
-@media (min-width: 600px) {
-
-    .header {
-        height: 68px;
-
-        padding: 0 28px;
-    }
-
-    .hero {
-        min-height: 580px;
-    }
-
-    .hero-content {
-        padding: 55px 35px;
-    }
-
-    .hero h1 {
-        font-size: clamp(55px, 9vw, 80px);
-    }
-
-    .hero button {
-        max-width: 220px;
-    }
-
-    .movies {
-        width: 100%;
-        max-width: 850px;
-
-        margin: 0 auto;
-
-        padding: 40px 25px;
-    }
-
-    .movie-card {
-        display: flex;
-    }
-
-    .movie-card img {
-        width: 260px;
-        height: 300px;
-
-        flex-shrink: 0;
-    }
-
-    .movie-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        padding: 28px;
-    }
-
-    .seats-section {
-        max-width: 650px;
-
-        margin: 0 auto;
-
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-}
-
-
-/* =========================================
-   DESKTOP
-========================================= */
-
-@media (min-width: 1000px) {
-
-    .header {
-        padding: 0 50px;
-    }
-
-    .hero {
-        max-width: 1400px;
-
-        min-height: 680px;
-
-        margin: 0 auto;
-
-        border-radius: 0 0 20px 20px;
-    }
-
-    .hero-content {
-        padding: 80px;
-    }
-
-    .hero h1 {
-        font-size: 88px;
-    }
-
-    .hero p {
-        font-size: 15px;
-    }
-
-    .movies {
-        max-width: 1000px;
-
-        padding-top: 55px;
-    }
-
-    .movie-card img {
-        width: 300px;
-        height: 340px;
-    }
-
-    .sessions button {
-        transition:
-            background .2s ease,
-            color .2s ease,
-            transform .2s ease;
-    }
-
-    .sessions button:hover {
-        background: #fff;
-        color: #08090c;
-    }
-
-    .hero button {
-        transition:
-            transform .2s ease,
-            box-shadow .2s ease;
-    }
-
-    .hero button:hover {
-        transform: translateY(-2px);
-
-        box-shadow:
-            0 10px 30px rgba(255,255,255,.15);
-    }
-
-    .seat:hover {
-        transform: scale(1.08);
-    }
-}
+```
