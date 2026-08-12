@@ -6,30 +6,21 @@
     box-sizing: border-box;
 }
 
-:root {
-    --bg: #08090c;
-    --card: #111318;
-    --card-light: #17191f;
-    --text: #ffffff;
-    --muted: #8b8f98;
-    --border: rgba(255, 255, 255, 0.08);
-    --accent: #ffffff;
-    --accent-dark: #e8e8e8;
-    --green: #4ade80;
-    --danger: #ef4444;
-}
-
 html {
-    scroll-behavior: smooth;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 body {
-    font-family: "Inter", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
+    width: 100%;
+    min-width: 0;
     overflow-x: hidden;
+
+    background: #08090c;
+    color: #fff;
+
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 
@@ -38,54 +29,54 @@ body {
 ========================================= */
 
 .header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-
     width: 100%;
-    height: 64px;
+    height: 60px;
+
+    padding: 0 16px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 0 18px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 
-    background: rgba(8, 9, 12, 0.82);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background: rgba(8, 9, 12, 0.88);
 
-    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid rgba(255,255,255,.07);
 }
 
 .logo {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 800;
-    letter-spacing: 2px;
+    letter-spacing: 1.8px;
+
+    white-space: nowrap;
 }
 
 .user {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 
-    color: #d8d8dc;
+    min-width: 0;
 
-    font-size: 13px;
+    color: #b9bbc2;
+
+    font-size: 12px;
     font-weight: 500;
 }
 
-.user:first-letter {
-    font-size: 16px;
-}
+#username {
+    max-width: 100px;
 
-
-/* =========================================
-   MAIN
-========================================= */
-
-main {
-    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 
@@ -104,110 +95,92 @@ main {
 
     overflow: hidden;
 
-    background:
+    background-image:
         linear-gradient(
-            180deg,
-            rgba(8, 9, 12, 0.05) 0%,
-            rgba(8, 9, 12, 0.25) 40%,
+            to bottom,
+            rgba(8,9,12,0.05) 0%,
+            rgba(8,9,12,0.15) 35%,
+            rgba(8,9,12,0.85) 82%,
             #08090c 100%
         ),
-        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba")
-        center / cover no-repeat;
-}
+        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba");
 
-.hero::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle at 50% 35%,
-            transparent 0%,
-            rgba(0, 0, 0, 0.25) 60%,
-            rgba(0, 0, 0, 0.65) 100%
-        );
-
-    pointer-events: none;
+    background-size: cover;
+    background-position: center;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
-
     width: 100%;
+    min-width: 0;
 
-    padding: 40px 20px 38px;
+    padding: 30px 16px 32px;
 }
 
 .badge {
     display: inline-flex;
-    align-items: center;
 
-    padding: 7px 11px;
+    padding: 6px 9px;
 
-    margin-bottom: 13px;
+    margin-bottom: 12px;
 
     border-radius: 6px;
 
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.12);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
 
     backdrop-filter: blur(10px);
-
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.3px;
 }
 
 .hero h1 {
-    font-size: clamp(42px, 12vw, 72px);
-    line-height: 0.95;
+    max-width: 100%;
+
+    font-size: clamp(38px, 13vw, 64px);
+    line-height: .95;
 
     font-weight: 800;
-    letter-spacing: -2.5px;
+    letter-spacing: -2px;
 
-    margin-bottom: 14px;
+    overflow-wrap: anywhere;
+
+    margin-bottom: 12px;
 }
 
 .hero p {
-    max-width: 330px;
+    width: 100%;
+    max-width: 320px;
 
-    color: #c2c4c9;
+    color: #b8bac0;
 
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.55;
 
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .hero button {
     width: 100%;
-    max-width: 220px;
+    max-width: 100%;
 
-    height: 52px;
+    min-height: 48px;
 
-    border: none;
-    border-radius: 12px;
+    border: 0;
+    border-radius: 11px;
 
-    background: #ffffff;
+    background: #fff;
     color: #08090c;
 
     font-family: inherit;
-    font-size: 14px;
+
+    font-size: 13px;
     font-weight: 700;
 
     cursor: pointer;
 
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.hero button:active {
-    transform: scale(0.97);
+    -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -216,17 +189,17 @@ main {
 ========================================= */
 
 .movies {
-    padding: 34px 18px;
+    width: 100%;
+
+    padding: 28px 16px 35px;
 }
 
-.movies h2,
-.seats-section h2 {
-    font-size: 22px;
+.movies h2 {
+    font-size: 21px;
     font-weight: 700;
+    letter-spacing: -.5px;
 
-    letter-spacing: -0.5px;
-
-    margin-bottom: 18px;
+    margin-bottom: 15px;
 }
 
 
@@ -235,61 +208,66 @@ main {
 ========================================= */
 
 .movie-card {
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    min-width: 0;
 
     overflow: hidden;
 
-    background: var(--card);
+    border-radius: 16px;
 
-    border: 1px solid var(--border);
-    border-radius: 18px;
+    background: #111318;
 
-    box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255,255,255,.07);
 }
 
 .movie-card img {
+    display: block;
+
     width: 100%;
-    height: 220px;
+    height: 190px;
 
     object-fit: cover;
-
-    display: block;
 }
 
 .movie-info {
-    padding: 18px;
+    width: 100%;
+    min-width: 0;
+
+    padding: 16px;
 }
 
 .movie-info h3 {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 700;
 
-    margin-bottom: 7px;
+    margin-bottom: 6px;
 }
 
 .movie-info > p {
-    color: var(--muted);
+    color: #858992;
 
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 11px;
 
-    margin-bottom: 18px;
+    margin-bottom: 15px;
 }
 
 
 /* =========================================
-   SESSION BUTTONS
+   SESSIONS
 ========================================= */
 
 .sessions {
+    width: 100%;
+
     display: flex;
-    gap: 8px;
+    gap: 7px;
 
     overflow-x: auto;
 
+    padding-bottom: 2px;
+
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .sessions::-webkit-scrollbar {
@@ -297,39 +275,64 @@ main {
 }
 
 .sessions button {
-    flex-shrink: 0;
+    flex: 0 0 auto;
 
-    min-width: 76px;
-    height: 42px;
+    min-width: 68px;
+    height: 40px;
 
-    padding: 0 13px;
+    padding: 0 11px;
 
-    border: 1px solid var(--border);
     border-radius: 9px;
 
-    background: var(--card-light);
-    color: #ffffff;
+    border: 1px solid rgba(255,255,255,.08);
+
+    background: #181a20;
+    color: #fff;
 
     font-family: inherit;
-    font-size: 12px;
+
+    font-size: 11px;
     font-weight: 600;
 
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.sessions button:hover {
-    background: #ffffff;
-    color: #08090c;
-    border-color: #ffffff;
+
+/* =========================================
+   SEATS SECTION
+========================================= */
+
+.seats-section {
+    width: 100%;
+
+    padding: 5px 16px 40px;
 }
 
-.sessions button:active {
-    transform: scale(0.95);
+.seats-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================
+   SCREEN
+========================================= */
+
+.screen {
+    width: min(80%, 320px);
+    height: 3px;
+
+    margin: 0 auto 35px;
+
+    border-radius: 100px;
+
+    background: #fff;
+
+    box-shadow: 0 0 18px rgba(255,255,255,.3);
+
+    font-size: 0;
 }
 
 
@@ -337,87 +340,55 @@ main {
    SEATS
 ========================================= */
 
-.seats-section {
-    padding: 10px 18px 45px;
-
-    animation: fadeIn 0.35s ease;
-}
-
-.hidden {
-    display: none;
-}
-
-.screen {
-    width: 80%;
-    height: 4px;
-
-    margin: 10px auto 32px;
-
-    border-radius: 100px;
-
-    background: #ffffff;
-
-    box-shadow:
-        0 0 20px rgba(255, 255, 255, 0.25);
-
-    text-align: center;
-
-    color: #777;
-
-    font-size: 8px;
-
-    padding-top: 13px;
-
-    opacity: 0.8;
-}
-
 .seats {
+    width: 100%;
+    max-width: 390px;
+
+    margin: 0 auto 30px;
+
     display: grid;
 
-    grid-template-columns: repeat(8, 1fr);
+    /*
+       8 seats per row
+       automatically shrinks
+    */
+    grid-template-columns: repeat(8, minmax(0, 1fr));
 
-    gap: 7px;
-
-    max-width: 420px;
-
-    margin: 0 auto 32px;
+    gap: clamp(5px, 2vw, 9px);
 }
 
 .seat {
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 1 / 1;
 
-    border-radius: 5px;
+    min-width: 0;
+
+    border-radius: 4px;
 
     background: #252830;
 
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255,255,255,.05);
 
     cursor: pointer;
 
     transition:
-        transform 0.15s ease,
-        background 0.15s ease,
-        box-shadow 0.15s ease;
-}
-
-.seat:hover {
-    transform: scale(1.08);
+        transform .15s ease,
+        background .15s ease;
 }
 
 .seat.selected {
-    background: #ffffff;
+    background: #fff;
 
     box-shadow:
-        0 0 15px rgba(255, 255, 255, 0.25);
+        0 0 12px rgba(255,255,255,.25);
 }
 
 .seat.occupied {
     background: #3a3c43;
 
-    opacity: 0.35;
+    opacity: .3;
 
-    cursor: not-allowed;
+    pointer-events: none;
 }
 
 
@@ -426,85 +397,178 @@ main {
 ========================================= */
 
 .summary {
-    max-width: 420px;
+    width: 100%;
+    max-width: 390px;
 
     margin: 0 auto;
 
-    padding: 18px;
+    padding: 16px;
 
-    border-radius: 16px;
+    border-radius: 15px;
 
-    background: var(--card);
+    background: #111318;
 
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255,255,255,.07);
 }
 
 .summary p {
+    width: 100%;
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
-    color: var(--muted);
+    gap: 15px;
 
-    font-size: 13px;
+    color: #888b94;
 
-    margin-bottom: 12px;
+    font-size: 12px;
+
+    margin-bottom: 11px;
 }
 
 .summary strong {
-    color: #ffffff;
+    color: #fff;
 
     font-weight: 600;
+
+    text-align: right;
+
+    overflow-wrap: anywhere;
 }
 
 #pay-button {
     width: 100%;
-    height: 50px;
+    min-height: 48px;
 
-    margin-top: 8px;
+    margin-top: 5px;
 
-    border: none;
-    border-radius: 11px;
+    border: 0;
+    border-radius: 10px;
 
-    background: #ffffff;
+    background: #fff;
     color: #08090c;
 
     font-family: inherit;
 
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        opacity 0.2s ease,
-        transform 0.2s ease;
 }
 
 #pay-button:disabled {
-    opacity: 0.35;
-
-    cursor: not-allowed;
-}
-
-#pay-button:not(:disabled):active {
-    transform: scale(0.98);
+    opacity: .35;
 }
 
 
 /* =========================================
-   ANIMATION
+   HIDDEN
 ========================================= */
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================
+   VERY SMALL PHONES
+   320px - 359px
+========================================= */
+
+@media (max-width: 359px) {
+
+    .header {
+        padding: 0 12px;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .logo {
+        font-size: 14px;
+    }
+
+    .user {
+        font-size: 11px;
+    }
+
+    #username {
+        max-width: 75px;
+    }
+
+    .hero {
+        min-height: 430px;
+    }
+
+    .hero-content {
+        padding: 25px 13px 27px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero button {
+        min-height: 46px;
+    }
+
+    .movies,
+    .seats-section {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .movie-card img {
+        height: 165px;
+    }
+
+    .movie-info {
+        padding: 14px;
+    }
+
+    .sessions {
+        gap: 5px;
+    }
+
+    .sessions button {
+        min-width: 62px;
+        height: 38px;
+        padding: 0 8px;
+    }
+
+    .seats {
+        gap: 4px;
+    }
+
+    .seat {
+        border-radius: 3px;
+    }
+}
+
+
+/* =========================================
+   NORMAL PHONES
+   360px - 599px
+========================================= */
+
+@media (min-width: 360px) and (max-width: 599px) {
+
+    .hero {
+        min-height: 500px;
+    }
+
+    .hero-content {
+        padding: 35px 18px;
+    }
+
+    .hero button {
+        max-width: 260px;
+    }
+
+    .movies,
+    .seats-section {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .movie-card img {
+        height: 210px;
     }
 }
 
@@ -516,41 +580,62 @@ main {
 @media (min-width: 600px) {
 
     .header {
-        padding: 0 30px;
+        height: 68px;
+
+        padding: 0 28px;
     }
 
     .hero {
-        min-height: 600px;
+        min-height: 580px;
     }
 
     .hero-content {
-        padding: 60px 40px;
+        padding: 55px 35px;
+    }
+
+    .hero h1 {
+        font-size: clamp(55px, 9vw, 80px);
+    }
+
+    .hero button {
+        max-width: 220px;
     }
 
     .movies {
-        max-width: 800px;
+        width: 100%;
+        max-width: 850px;
+
         margin: 0 auto;
 
-        padding: 50px 30px;
+        padding: 40px 25px;
     }
 
     .movie-card {
-        flex-direction: row;
+        display: flex;
     }
 
     .movie-card img {
-        width: 240px;
+        width: 260px;
         height: 300px;
+
+        flex-shrink: 0;
     }
 
     .movie-info {
-        flex: 1;
-
         display: flex;
         flex-direction: column;
         justify-content: center;
 
-        padding: 30px;
+        padding: 28px;
+    }
+
+    .seats-section {
+        max-width: 650px;
+
+        margin: 0 auto;
+
+        padding-left: 25px;
+        padding-right: 25px;
     }
 }
 
@@ -562,21 +647,17 @@ main {
 @media (min-width: 1000px) {
 
     .header {
-        height: 72px;
-
-        padding: 0 60px;
-    }
-
-    .logo {
-        font-size: 19px;
+        padding: 0 50px;
     }
 
     .hero {
-        min-height: 700px;
-
         max-width: 1400px;
 
+        min-height: 680px;
+
         margin: 0 auto;
+
+        border-radius: 0 0 20px 20px;
     }
 
     .hero-content {
@@ -584,26 +665,50 @@ main {
     }
 
     .hero h1 {
-        font-size: 82px;
+        font-size: 88px;
     }
 
     .hero p {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .movies {
         max-width: 1000px;
+
+        padding-top: 55px;
     }
 
-    .movie-card {
+    .movie-card img {
+        width: 300px;
+        height: 340px;
+    }
+
+    .sessions button {
         transition:
-            transform 0.25s ease,
-            border-color 0.25s ease;
+            background .2s ease,
+            color .2s ease,
+            transform .2s ease;
     }
 
-    .movie-card:hover {
-        transform: translateY(-4px);
+    .sessions button:hover {
+        background: #fff;
+        color: #08090c;
+    }
 
-        border-color: rgba(255, 255, 255, 0.15);
+    .hero button {
+        transition:
+            transform .2s ease,
+            box-shadow .2s ease;
+    }
+
+    .hero button:hover {
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 10px 30px rgba(255,255,255,.15);
+    }
+
+    .seat:hover {
+        transform: scale(1.08);
     }
 }
