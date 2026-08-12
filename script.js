@@ -3,6 +3,18 @@ const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 
+
+// ==================================================
+// MODE
+// ==================================================
+
+const TEST_MODE = true;
+
+
+// ==================================================
+// DATA
+// ==================================================
+
 let selectedSession = null;
 let selectedSeats = [];
 
@@ -16,11 +28,12 @@ const PRICE_PER_SEAT = 300;
 const user = tg.initDataUnsafe?.user;
 
 if (user) {
-    const usernameElement =
+
+    const username =
         document.getElementById("username");
 
-    if (usernameElement) {
-        usernameElement.textContent =
+    if (username) {
+        username.textContent =
             user.first_name || "User";
     }
 }
@@ -32,11 +45,11 @@ if (user) {
 
 function openMovie() {
 
-    const seatsSection =
+    const section =
         document.getElementById("seats-section");
 
-    if (seatsSection) {
-        seatsSection.classList.remove("hidden");
+    if (section) {
+        section.classList.remove("hidden");
     }
 
     createSeats();
@@ -57,11 +70,13 @@ function selectSession(time) {
 
     updateSummary();
 
-    const seatsSection =
+
+    const section =
         document.getElementById("seats-section");
 
-    if (seatsSection) {
-        seatsSection.scrollIntoView({
+    if (section) {
+
+        section.scrollIntoView({
             behavior: "smooth"
         });
     }
@@ -94,18 +109,24 @@ function createSeats() {
         seat.textContent = i;
 
 
-        // Demo taken seats
+        // Taken seats
 
-        if ([5, 8, 17, 25].includes(i)) {
+        if (
+            [5, 8, 17, 25].includes(i)
+        ) {
 
             seat.classList.add("taken");
 
         } else {
 
             seat.onclick = function () {
-                toggleSeat(i, seat);
-            };
 
+                toggleSeat(
+                    i,
+                    seat
+                );
+
+            };
         }
 
 
@@ -118,9 +139,14 @@ function createSeats() {
 // SELECT SEAT
 // ==================================================
 
-function toggleSeat(number, element) {
+function toggleSeat(
+    number,
+    element
+) {
 
-    if (selectedSeats.includes(number)) {
+    if (
+        selectedSeats.includes(number)
+    ) {
 
         selectedSeats =
             selectedSeats.filter(
@@ -171,7 +197,9 @@ function updateSummary() {
 
 
     const totalElement =
-        document.getElementById("total");
+        document.getElementById(
+            "total"
+        );
 
     if (totalElement) {
 
@@ -199,11 +227,9 @@ function updateSummary() {
 
 async function pay() {
 
-    // ----------------------------------------------
-    // CHECK SEATS
-    // ----------------------------------------------
-
-    if (selectedSeats.length === 0) {
+    if (
+        selectedSeats.length === 0
+    ) {
 
         tg.showAlert(
             "💺 Նախ ընտրիր տեղերը։"
@@ -212,10 +238,6 @@ async function pay() {
         return;
     }
 
-
-    // ----------------------------------------------
-    // CHECK SESSION
-    // ----------------------------------------------
 
     if (!selectedSession) {
 
@@ -226,10 +248,6 @@ async function pay() {
         return;
     }
 
-
-    // ----------------------------------------------
-    // USER
-    // ----------------------------------------------
 
     const userId =
         tg.initDataUnsafe?.user?.id;
@@ -245,38 +263,96 @@ async function pay() {
     }
 
 
-    // ----------------------------------------------
-    // TOTAL
-    // ----------------------------------------------
-
     const total =
         selectedSeats.length *
         PRICE_PER_SEAT;
 
-
-    // ----------------------------------------------
-    // DISABLE BUTTON
-    // ----------------------------------------------
 
     const payButton =
         document.getElementById(
             "pay-button"
         );
 
+
     if (payButton) {
 
         payButton.disabled = true;
 
         payButton.textContent =
-            "⏳ Պատրաստվում է...";
+            "⏳ Processing...";
     }
 
 
     try {
 
-        // ==========================================
-        // REQUEST VERCEL API
-        // ==========================================
+        // ==================================================
+        // TEST PAYMENT
+        // ==================================================
+
+        if (TEST_MODE) {
+
+            const response =
+                await fetch(
+                    "/api/test-payment",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            user_id:
+                                userId,
+
+                            movie:
+                                "Avatar",
+
+                            session:
+                                selectedSession,
+
+                            seats:
+                                selectedSeats,
+
+                            amount:
+                                total
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                tg.showAlert(
+                    data.error ||
+                    "Test payment error."
+                );
+
+                return;
+            }
+
+
+            tg.showAlert(
+                "🧪 TEST PAYMENT\n\n" +
+                "✅ Թեստը հաջողությամբ ավարտվեց։\n\n" +
+                "⭐ Իրական Stars չեն գանձվել։"
+            );
+
+
+            return;
+        }
+
+
+        // ==================================================
+        // REAL STARS PAYMENT
+        // ==================================================
 
         const response =
             await fetch(
@@ -292,9 +368,11 @@ async function pay() {
 
                     body: JSON.stringify({
 
-                        user_id: userId,
+                        user_id:
+                            userId,
 
-                        movie: "Avatar",
+                        movie:
+                            "Avatar",
 
                         session:
                             selectedSession,
@@ -309,62 +387,30 @@ async function pay() {
             );
 
 
-        // ==========================================
-        // READ RESPONSE
-        // ==========================================
-
         const data =
             await response.json();
 
 
-        // ==========================================
-        // ERROR
-        // ==========================================
-
         if (!response.ok) {
-
-            console.error(
-                "Payment API error:",
-                data
-            );
 
             tg.showAlert(
                 data.error ||
-                "❌ Invoice ստեղծելու սխալ։"
+                "Invoice ստեղծելու սխալ։"
             );
 
             return;
         }
 
-
-        // ==========================================
-        // INVOICE URL
-        // ==========================================
 
         if (!data.invoice_url) {
 
-            console.error(
-                "Invoice URL missing:",
-                data
-            );
-
             tg.showAlert(
-                "❌ Invoice link չի ստացվել։"
+                "Invoice link չի ստացվել։"
             );
 
             return;
         }
 
-
-        console.log(
-            "Invoice:",
-            data.invoice_url
-        );
-
-
-        // ==========================================
-        // OPEN TELEGRAM STARS PAYMENT
-        // ==========================================
 
         tg.openInvoice(
             data.invoice_url,
@@ -376,24 +422,15 @@ async function pay() {
                 );
 
 
-                // ----------------------------------
-                // PAID
-                // ----------------------------------
-
-                if (status === "paid") {
+                if (
+                    status === "paid"
+                ) {
 
                     tg.showAlert(
                         "✅ Վճարումը հաջողությամբ կատարվեց!"
                     );
 
-                }
-
-
-                // ----------------------------------
-                // CANCELLED
-                // ----------------------------------
-
-                else if (
+                } else if (
                     status === "cancelled"
                 ) {
 
@@ -401,33 +438,12 @@ async function pay() {
                         "Վճարումը չեղարկվեց։"
                     );
 
-                }
-
-
-                // ----------------------------------
-                // FAILED
-                // ----------------------------------
-
-                else if (
+                } else if (
                     status === "failed"
                 ) {
 
                     tg.showAlert(
                         "❌ Վճարումը չհաջողվեց։"
-                    );
-
-                }
-
-
-                // ----------------------------------
-                // PENDING
-                // ----------------------------------
-
-                else {
-
-                    console.log(
-                        "Payment status:",
-                        status
                     );
                 }
             }
@@ -449,10 +465,6 @@ async function pay() {
 
     } finally {
 
-        // ==========================================
-        // RESTORE BUTTON
-        // ==========================================
-
         if (payButton) {
 
             payButton.disabled =
@@ -466,7 +478,7 @@ async function pay() {
 
 
 // ==================================================
-// INITIAL SUMMARY
+// INITIALIZE
 // ==================================================
 
 updateSummary();
