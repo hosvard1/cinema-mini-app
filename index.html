@@ -1,171 +1,137 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
-
     <title>Cinema</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
 <header class="header">
-
     <div class="logo">
         CINEMA
     </div>
-
     <div class="user">
         <span class="user-icon">👤</span>
         <span id="username">User</span>
     </div>
-
 </header>
-
-
 <main>
-
     <!-- HERO -->
-
     <section class="hero">
-
         <div class="hero-content">
-
             <span class="badge">
                 NOW SHOWING
             </span>
-
             <h1>
                 Avatar
             </h1>
-
             <p>
                 Experience the movie on the big screen.
             </p>
-
             <button
                 type="button"
                 onclick="openMovie()"
             >
                 Buy Ticket
             </button>
-
         </div>
-
     </section>
-
-
     <!-- MOVIES -->
-
     <section class="movies">
-
         <h2>
             Movies
         </h2>
-
-
         <div class="movie-card">
-
             <div class="movie-image">
-
                 <img
                     src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba"
                     alt="Cinema"
                 >
-
             </div>
-
-
             <div class="movie-info">
-
                 <h3>
                     Avatar
                 </h3>
-
                 <p>
                     Action · Adventure · Sci-Fi
                 </p>
-
-
                 <div class="sessions">
-
                     <button
                         type="button"
-                        onclick="selectSession('18:00')"
+                        onclick="selectSession('18:00', this)"
                     >
                         18:00
                     </button>
-
                     <button
                         type="button"
-                        onclick="selectSession('20:30')"
+                        onclick="selectSession('20:30', this)"
                     >
                         20:30
                     </button>
-
                     <button
                         type="button"
-                        onclick="selectSession('23:00')"
+                        onclick="selectSession('23:00', this)"
                     >
                         23:00
                     </button>
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
-
-
     <!-- SEATS -->
-
     <section
         id="seats-section"
         class="seats-section hidden"
     >
-
         <h2>
             Select your seats
         </h2>
-
-
         <div class="screen">
             SCREEN
         </div>
-
-
+        <div class="legend">
+            <span class="legend-item">
+                <span class="legend-dot dot-available"></span>
+                Available
+            </span>
+            <span class="legend-item">
+                <span class="legend-dot dot-selected"></span>
+                Selected
+            </span>
+            <span class="legend-item">
+                <span class="legend-dot dot-taken"></span>
+                Taken
+            </span>
+        </div>
         <div
             id="seats"
             class="seats"
         ></div>
-
-
         <div class="summary">
-
             <p>
                 Seats:
                 <strong id="selected-seats">
                     —
                 </strong>
             </p>
-
             <p>
                 Total:
                 <strong id="total">
                     0 ⭐
                 </strong>
             </p>
-
             <button
                 id="pay-button"
                 type="button"
@@ -174,19 +140,10 @@
             >
                 ⭐ Pay
             </button>
-
         </div>
-
     </section>
-
 </main>
-
-
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
 <script src="script.js"></script>
-
 </body>
-
 </html>
-```
