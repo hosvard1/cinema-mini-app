@@ -1,4 +1,26 @@
-```css
+ :root {
+    --bg: #0c0b0a;
+    --bg-raised: #131110;
+
+    --surface: rgba(245, 240, 230, 0.045);
+    --surface-hover: rgba(245, 240, 230, 0.08);
+    --border: rgba(245, 240, 230, 0.1);
+    --border-soft: rgba(245, 240, 230, 0.06);
+
+    --ink: #f4efe4;
+    --ink-dim: rgba(244, 239, 228, 0.58);
+    --ink-faint: rgba(244, 239, 228, 0.34);
+
+    --gold: #c9a24b;
+    --gold-bright: #e2c37a;
+    --gold-dim: rgba(201, 162, 75, 0.35);
+
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -11,10 +33,11 @@ html {
 
 body {
     min-height: 100vh;
-    background: #08090d;
-    color: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
 
@@ -24,7 +47,7 @@ body {
 
 .header {
     width: 100%;
-    height: 72px;
+    height: 76px;
 
     display: flex;
     align-items: center;
@@ -32,8 +55,8 @@ body {
 
     padding: 0 7%;
 
-    background: rgba(8, 9, 13, 0.88);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(12, 11, 10, 0.86);
+    border-bottom: 1px solid var(--border-soft);
 
     position: relative;
     z-index: 10;
@@ -43,19 +66,32 @@ body {
 }
 
 .logo {
-    color: #ffffff;
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: 4px;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    position: relative;
+}
+
+.logo::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 22px;
+    height: 2px;
+    background: var(--gold);
 }
 
 .user {
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 10px;
 
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 14px;
+    color: var(--ink-dim);
+    font-size: 13px;
+    letter-spacing: 0.2px;
 }
 
 .user-icon {
@@ -67,8 +103,9 @@ body {
     justify-content: center;
 
     border-radius: 50%;
+    border: 1px solid var(--gold-dim);
 
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--surface);
 }
 
 
@@ -77,7 +114,7 @@ body {
 ========================= */
 
 .hero {
-    min-height: 620px;
+    min-height: 640px;
 
     position: relative;
 
@@ -87,10 +124,10 @@ body {
     background:
         linear-gradient(
             90deg,
-            rgba(8, 9, 13, 0.98) 0%,
-            rgba(8, 9, 13, 0.82) 35%,
-            rgba(8, 9, 13, 0.35) 70%,
-            rgba(8, 9, 13, 0.9) 100%
+            rgba(12, 11, 10, 0.98) 0%,
+            rgba(12, 11, 10, 0.86) 32%,
+            rgba(12, 11, 10, 0.42) 68%,
+            rgba(12, 11, 10, 0.92) 100%
         ),
         url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba")
         center / cover no-repeat;
@@ -104,12 +141,12 @@ body {
     right: 0;
     bottom: 0;
 
-    height: 180px;
+    height: 200px;
 
     background: linear-gradient(
         to bottom,
         transparent,
-        #08090d
+        var(--bg)
     );
 
     pointer-events: none;
@@ -125,71 +162,91 @@ body {
 }
 
 .badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 
-    margin-bottom: 20px;
-    padding: 8px 13px;
+    margin-bottom: 24px;
+    padding: 8px 16px;
 
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border: 1px solid var(--gold-dim);
     border-radius: 50px;
 
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(201, 162, 75, 0.08);
 
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--gold-bright);
 
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+}
+
+.badge::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold-bright);
 }
 
 .hero h1 {
-    font-size: clamp(52px, 8vw, 100px);
-    line-height: 0.95;
+    font-family: var(--font-display);
+    font-size: clamp(52px, 8vw, 104px);
+    line-height: 0.96;
 
-    font-weight: 800;
-    letter-spacing: -4px;
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: -1px;
 
-    margin-bottom: 22px;
+    margin-bottom: 24px;
 }
 
 .hero p {
-    max-width: 500px;
+    max-width: 480px;
 
-    color: rgba(255, 255, 255, 0.68);
+    color: var(--ink-dim);
 
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.7;
+    letter-spacing: 0.1px;
 
-    margin-bottom: 30px;
+    margin-bottom: 34px;
 }
 
 .hero button {
-    border: none;
+    border: 1px solid var(--gold);
     outline: none;
 
-    padding: 15px 25px;
+    padding: 16px 30px;
 
-    border-radius: 12px;
+    border-radius: 4px;
 
-    background: #ffffff;
-    color: #08090d;
+    background: var(--gold);
+    color: #16130c;
 
-    font-size: 14px;
+    font-family: var(--font-body);
+    font-size: 13px;
     font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 
     cursor: pointer;
 
     transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        opacity 0.25s ease;
+        transform 0.3s var(--ease),
+        box-shadow 0.3s var(--ease),
+        background 0.3s var(--ease);
 }
 
 .hero button:hover {
+    background: var(--gold-bright);
+    border-color: var(--gold-bright);
+
     transform: translateY(-2px);
 
     box-shadow:
-        0 12px 35px rgba(255, 255, 255, 0.18);
+        0 14px 34px rgba(201, 162, 75, 0.25);
 }
 
 .hero button:active {
@@ -206,16 +263,17 @@ body {
 
     margin: 0 auto;
 
-    padding: 80px 0;
+    padding: 90px 0;
 }
 
 .movies h2,
 .seats-section h2 {
-    font-size: 32px;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 33px;
+    font-weight: 600;
 
-    margin-bottom: 30px;
-    letter-spacing: -1px;
+    margin-bottom: 34px;
+    letter-spacing: -0.5px;
 }
 
 
@@ -231,22 +289,29 @@ body {
 
     overflow: hidden;
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.055),
-            rgba(255, 255, 255, 0.015)
-        );
+    background: var(--bg-raised);
 
     box-shadow:
-        0 25px 70px rgba(0, 0, 0, 0.35);
+        0 30px 80px rgba(0, 0, 0, 0.45);
 }
 
 .movie-image {
-    min-height: 330px;
+    min-height: 340px;
+    position: relative;
+}
+
+.movie-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(12, 11, 10, 0) 60%,
+        var(--bg-raised) 100%
+    );
 }
 
 .movie-image img {
@@ -256,10 +321,11 @@ body {
     display: block;
 
     object-fit: cover;
+    filter: saturate(0.92) contrast(1.03);
 }
 
 .movie-info {
-    padding: 38px;
+    padding: 40px 44px;
 
     display: flex;
     flex-direction: column;
@@ -267,16 +333,21 @@ body {
 }
 
 .movie-info h3 {
-    font-size: 34px;
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 600;
     margin-bottom: 10px;
 }
 
 .movie-info > p {
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--gold);
 
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 
-    margin-bottom: 30px;
+    margin-bottom: 32px;
 }
 
 
@@ -292,37 +363,42 @@ body {
 }
 
 .sessions button {
-    min-width: 85px;
+    min-width: 88px;
 
-    padding: 13px 17px;
+    padding: 13px 18px;
 
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
 
-    background: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
+    background: var(--surface);
+    color: var(--ink);
 
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 600;
+    letter-spacing: 0.3px;
 
     cursor: pointer;
 
     transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
+        background 0.2s var(--ease),
+        border-color 0.2s var(--ease),
+        color 0.2s var(--ease);
 }
 
 .sessions button:hover {
-    background: rgba(255, 255, 255, 0.12);
-
-    border-color: rgba(255, 255, 255, 0.3);
-
-    transform: translateY(-2px);
+    background: var(--surface-hover);
+    border-color: var(--gold-dim);
 }
 
 .sessions button:active {
-    transform: scale(0.96);
+    transform: scale(0.97);
+}
+
+.sessions button.active {
+    background: var(--gold);
+    color: #16130c;
+    border-color: var(--gold);
 }
 
 
@@ -335,7 +411,7 @@ body {
 
     margin: 0 auto;
 
-    padding: 60px 0 100px;
+    padding: 70px 0 110px;
 }
 
 .hidden {
@@ -350,17 +426,23 @@ body {
 .screen {
     width: min(600px, 85%);
 
-    height: 8px;
+    height: 3px;
 
-    margin: 0 auto 55px;
+    margin: 0 auto 20px;
 
     border-radius: 100px;
 
-    background: #ffffff;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--gold-dim) 15%,
+        var(--gold) 50%,
+        var(--gold-dim) 85%,
+        transparent
+    );
 
     box-shadow:
-        0 0 25px rgba(255, 255, 255, 0.25),
-        0 0 60px rgba(255, 255, 255, 0.08);
+        0 8px 30px rgba(201, 162, 75, 0.18);
 
     color: transparent;
 
@@ -373,14 +455,57 @@ body {
     position: absolute;
 
     left: 50%;
-    top: 20px;
+    top: 16px;
 
     transform: translateX(-50%);
 
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--ink-faint);
 
-    font-size: 9px;
-    letter-spacing: 3px;
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+
+/* =========================
+   LEGEND
+========================= */
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+
+    margin: 40px 0 34px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: var(--ink-faint);
+    font-size: 12px;
+    letter-spacing: 0.3px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+}
+
+.dot-available {
+    background: var(--surface-hover);
+    border: 1px solid var(--border);
+}
+
+.dot-selected {
+    background: var(--gold);
+}
+
+.dot-taken {
+    background: rgba(245, 240, 230, 0.04);
+    border: 1px solid var(--border-soft);
 }
 
 
@@ -399,56 +524,78 @@ body {
 
     max-width: 700px;
 
-    margin: 0 auto 50px;
+    margin: 0 auto 55px;
 }
 
 .seat {
     aspect-ratio: 1 / 1;
 
-    border-radius: 7px;
+    border-radius: 4px 4px 8px 8px;
 
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--surface);
 
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border);
 
     cursor: pointer;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--ink-faint);
+    font-size: 11px;
+    font-family: var(--font-body);
+
     transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease;
+        transform 0.2s var(--ease),
+        background 0.2s var(--ease),
+        border-color 0.2s var(--ease),
+        color 0.2s var(--ease);
 }
 
 .seat:hover {
     transform: translateY(-3px);
 
-    background: rgba(255, 255, 255, 0.17);
+    background: var(--surface-hover);
+    border-color: var(--gold-dim);
 
-    border-color: rgba(255, 255, 255, 0.25);
+    color: var(--ink);
 }
 
 .seat.selected {
-    background: #ffffff;
+    background: var(--gold);
 
-    border-color: #ffffff;
+    border-color: var(--gold);
+
+    color: #16130c;
+    font-weight: 700;
 
     box-shadow:
-        0 5px 20px rgba(255, 255, 255, 0.18);
+        0 6px 22px rgba(201, 162, 75, 0.35);
 }
 
-.seat.occupied {
-    background: rgba(255, 255, 255, 0.025);
+.seat.taken {
+    background: rgba(245, 240, 230, 0.02);
 
-    border-color: rgba(255, 255, 255, 0.04);
+    border-color: var(--border-soft);
+
+    color: var(--ink-faint);
+    opacity: 0.3;
 
     cursor: not-allowed;
+}
 
-    opacity: 0.35;
+.seat.taken:hover {
+    transform: none;
+    background: rgba(245, 240, 230, 0.02);
+    border-color: var(--border-soft);
 }
 
 
 /* =========================
-   SUMMARY
+   SUMMARY — styled as a
+   physical ticket stub with
+   a perforated tear line
 ========================= */
 
 .summary {
@@ -456,7 +603,7 @@ body {
 
     margin: 0 auto;
 
-    padding: 22px;
+    padding: 26px 30px;
 
     display: flex;
     align-items: center;
@@ -464,49 +611,102 @@ body {
 
     gap: 20px;
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
+    position: relative;
 
-    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: var(--bg-raised);
+}
+
+.summary::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 176px;
+
+    width: 0;
+
+    border-left: 1px dashed var(--border);
+}
+
+.summary::after {
+    content: "";
+
+    position: absolute;
+    right: 168px;
+    top: 50%;
+
+    width: 16px;
+    height: 16px;
+
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+
+    transform: translate(50%, -50%);
 }
 
 .summary p {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--ink-faint);
 
-    font-size: 13px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .summary strong {
-    color: #ffffff;
+    display: block;
 
-    margin-left: 5px;
+    margin-top: 6px;
+
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
 }
 
 #pay-button {
-    border: none;
+    border: 1px solid var(--gold);
 
-    padding: 13px 24px;
+    padding: 15px 26px;
 
-    border-radius: 10px;
+    border-radius: 4px;
 
-    background: #ffffff;
-    color: #08090d;
+    background: var(--gold);
+    color: #16130c;
 
+    font-family: var(--font-body);
     font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 
     cursor: pointer;
 
     transition:
-        transform 0.2s ease,
-        opacity 0.2s ease;
+        transform 0.2s var(--ease),
+        background 0.2s var(--ease),
+        opacity 0.2s var(--ease);
 }
 
 #pay-button:not(:disabled):hover {
+    background: var(--gold-bright);
+    border-color: var(--gold-bright);
     transform: translateY(-2px);
 }
 
 #pay-button:disabled {
-    opacity: 0.3;
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--ink-faint);
+
+    opacity: 0.6;
 
     cursor: not-allowed;
 }
@@ -523,7 +723,7 @@ body {
     }
 
     .hero {
-        min-height: 560px;
+        min-height: 580px;
 
         background-position: center;
     }
@@ -543,11 +743,11 @@ body {
     }
 
     .movie-info {
-        padding: 28px;
+        padding: 30px;
     }
 
     .movie-info h3 {
-        font-size: 28px;
+        font-size: 29px;
     }
 
     .seats {
@@ -599,9 +799,9 @@ body {
         background:
             linear-gradient(
                 to bottom,
-                rgba(8, 9, 13, 0.2) 0%,
-                rgba(8, 9, 13, 0.65) 45%,
-                #08090d 100%
+                rgba(12, 11, 10, 0.2) 0%,
+                rgba(12, 11, 10, 0.68) 45%,
+                var(--bg) 100%
             ),
             url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba")
             center / cover no-repeat;
@@ -614,9 +814,9 @@ body {
     }
 
     .badge {
-        margin-bottom: 15px;
+        margin-bottom: 16px;
 
-        padding: 7px 11px;
+        padding: 7px 12px;
 
         font-size: 9px;
     }
@@ -624,9 +824,9 @@ body {
     .hero h1 {
         font-size: 54px;
 
-        letter-spacing: -2px;
+        letter-spacing: -0.5px;
 
-        margin-bottom: 15px;
+        margin-bottom: 16px;
     }
 
     .hero p {
@@ -634,13 +834,13 @@ body {
 
         line-height: 1.55;
 
-        margin-bottom: 22px;
+        margin-bottom: 24px;
     }
 
     .hero button {
         width: 100%;
 
-        padding: 15px;
+        padding: 16px;
     }
 
 
@@ -649,14 +849,14 @@ body {
     .movies {
         width: calc(100% - 36px);
 
-        padding: 55px 0;
+        padding: 60px 0;
     }
 
     .movies h2,
     .seats-section h2 {
-        font-size: 27px;
+        font-size: 26px;
 
-        margin-bottom: 20px;
+        margin-bottom: 22px;
     }
 
 
@@ -665,7 +865,7 @@ body {
     .movie-card {
         display: block;
 
-        border-radius: 16px;
+        border-radius: 6px;
     }
 
     .movie-image {
@@ -674,22 +874,28 @@ body {
         min-height: 0;
     }
 
+    .movie-image::after {
+        background: linear-gradient(
+            to bottom,
+            rgba(12, 11, 10, 0) 55%,
+            var(--bg-raised) 100%
+        );
+    }
+
     .movie-info {
-        padding: 22px;
+        padding: 24px;
     }
 
     .movie-info h3 {
-        font-size: 26px;
+        font-size: 27px;
 
         margin-bottom: 8px;
     }
 
     .movie-info > p {
-        font-size: 13px;
+        font-size: 11px;
 
-        line-height: 1.5;
-
-        margin-bottom: 22px;
+        margin-bottom: 24px;
     }
 
 
@@ -721,21 +927,20 @@ body {
     .seats-section {
         width: calc(100% - 36px);
 
-        padding: 40px 0 70px;
+        padding: 45px 0 75px;
     }
 
     .screen {
         width: 90%;
 
-        height: 5px;
-
-        margin-bottom: 45px;
+        margin-bottom: 16px;
     }
 
-    .screen::after {
-        top: 15px;
+    .legend {
+        gap: 16px;
+        flex-wrap: wrap;
 
-        font-size: 8px;
+        margin: 32px 0 26px;
     }
 
     .seats {
@@ -745,34 +950,31 @@ body {
 
         gap: 6px;
 
-        margin-bottom: 35px;
-    }
-
-    .seat {
-        border-radius: 5px;
+        margin-bottom: 38px;
     }
 
 
     /* SUMMARY */
 
     .summary {
-        padding: 16px;
+        padding: 20px;
 
         flex-direction: column;
 
         align-items: stretch;
 
-        gap: 14px;
+        gap: 18px;
     }
 
-    .summary p {
-        font-size: 12px;
+    .summary::before,
+    .summary::after {
+        display: none;
     }
 
     #pay-button {
         width: 100%;
 
-        padding: 14px;
+        padding: 15px;
     }
 
 }
@@ -807,10 +1009,6 @@ body {
         gap: 4px;
     }
 
-    .summary {
-        border-radius: 13px;
-    }
-
 }
 
 
@@ -821,8 +1019,7 @@ body {
 @media (max-height: 650px) and (max-width: 600px) {
 
     .hero {
-        min-height: 430px;
+        min-height: 440px;
     }
 
 }
-```
