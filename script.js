@@ -60,7 +60,7 @@ function openMovie() {
 // SESSION
 // ==================================================
 
-function selectSession(time) {
+function selectSession(time, buttonElement) {
 
     selectedSession = time;
 
@@ -71,10 +71,25 @@ function selectSession(time) {
     updateSummary();
 
 
+    // Highlight the chosen session button
+
+    document
+        .querySelectorAll(".sessions button")
+        .forEach(function (btn) {
+            btn.classList.remove("active");
+        });
+
+    if (buttonElement) {
+        buttonElement.classList.add("active");
+    }
+
+
     const section =
         document.getElementById("seats-section");
 
     if (section) {
+
+        section.classList.remove("hidden");
 
         section.scrollIntoView({
             behavior: "smooth"
@@ -217,6 +232,9 @@ function updateSummary() {
 
         payButton.disabled =
             selectedSeats.length === 0;
+
+        payButton.textContent =
+            `⭐ Pay ${total} Stars`;
     }
 }
 
