@@ -158,16 +158,7 @@ main {
 
     overflow: hidden;
 
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0, 0, 0, 0.88),
-            rgba(0, 0, 0, 0.4)
-        ),
-        url("fullhouse.jpeg");
-
-    background-size: cover;
-    background-position: center;
+    background: #000;
 
     display: flex;
     align-items: center;
@@ -186,6 +177,68 @@ main {
             to bottom,
             transparent 60%,
             var(--bg)
+        );
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+
+/* ==================================================
+   HERO SLIDES (fixes broken/non-functional carousel)
+================================================== */
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.8s var(--ease),
+        visibility 0.8s var(--ease);
+
+    z-index: 0;
+}
+
+
+.hero-slide.active {
+    opacity: 1;
+    visibility: visible;
+
+    z-index: 1;
+}
+
+
+.hero-slide > img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: -1;
+}
+
+
+.hero-slide::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.88),
+            rgba(0, 0, 0, 0.4)
         );
 }
 
@@ -292,6 +345,47 @@ main {
 
 .hero-content button:active {
     transform: translateY(0);
+}
+
+
+/* ==================================================
+   HERO DOTS (navigation for slideshow)
+================================================== */
+
+.hero-dots {
+    position: absolute;
+
+    bottom: 24px;
+    left: 8%;
+
+    display: flex;
+
+    gap: 10px;
+
+    z-index: 3;
+}
+
+
+.hero-dot {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: rgba(245, 241, 232, 0.3);
+
+    border: none;
+
+    cursor: pointer;
+
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+
+.hero-dot.active {
+    background: var(--gold);
+
+    transform: scale(1.2);
 }
 
 
@@ -915,8 +1009,6 @@ main {
 
     .hero {
         min-height: 540px;
-
-        background-position: center;
     }
 
 
