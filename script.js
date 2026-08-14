@@ -15,6 +15,7 @@ const TEST_MODE = false;
 // DATA
 // ==================================================
 
+let selectedMovie = null;
 let selectedSession = null;
 let selectedSeats = [];
 
@@ -34,7 +35,7 @@ if (user) {
 
     if (username) {
         username.textContent =
-            user.first_name || "User";
+            user.first_name || "Օգտատեր";
     }
 }
 
@@ -53,6 +54,8 @@ function openMovie() {
     }
 
     createSeats();
+
+    updateSummary();
 }
 
 
@@ -66,23 +69,61 @@ function selectSession(time, buttonElement) {
 
     selectedSeats = [];
 
+
+    // ==============================================
+    // GET MOVIE NAME FROM THE SELECTED MOVIE CARD
+    // ==============================================
+
+    const movieCard =
+        buttonElement?.closest(".movie-card");
+
+    if (movieCard) {
+
+        const movieTitle =
+            movieCard.querySelector(".movie-info h3");
+
+        if (movieTitle) {
+
+            selectedMovie =
+                movieTitle.textContent.trim();
+        }
+    }
+
+
+    // ==============================================
+    // CREATE SEATS
+    // ==============================================
+
     createSeats();
 
     updateSummary();
 
 
-    // Highlight the chosen session button
+    // ==============================================
+    // REMOVE ACTIVE FROM ALL SESSION BUTTONS
+    // ==============================================
 
     document
         .querySelectorAll(".sessions button")
         .forEach(function (btn) {
+
             btn.classList.remove("active");
+
         });
+
+
+    // ==============================================
+    // ADD ACTIVE TO CURRENT BUTTON
+    // ==============================================
 
     if (buttonElement) {
         buttonElement.classList.add("active");
     }
 
+
+    // ==============================================
+    // SHOW SEATS
+    // ==============================================
 
     const section =
         document.getElementById("seats-section");
@@ -124,7 +165,9 @@ function createSeats() {
         seat.textContent = i;
 
 
-        // Taken seats
+        // ==========================================
+        // TAKEN SEATS
+        // ==========================================
 
         if (
             [5, 8, 17, 25].includes(i)
@@ -234,7 +277,7 @@ function updateSummary() {
             selectedSeats.length === 0;
 
         payButton.textContent =
-            `⭐ Pay ${total} Stars`;
+            `⭐ Վճարել ${total} Stars`;
     }
 }
 
@@ -244,6 +287,10 @@ function updateSummary() {
 // ==================================================
 
 async function pay() {
+
+    // ==============================================
+    // CHECK SEATS
+    // ==============================================
 
     if (
         selectedSeats.length === 0
@@ -257,6 +304,24 @@ async function pay() {
     }
 
 
+    // ==============================================
+    // CHECK MOVIE
+    // ==============================================
+
+    if (!selectedMovie) {
+
+        tg.showAlert(
+            "🎬 Նախ ընտրիր ֆիլմը։"
+        );
+
+        return;
+    }
+
+
+    // ==============================================
+    // CHECK SESSION
+    // ==============================================
+
     if (!selectedSession) {
 
         tg.showAlert(
@@ -267,6 +332,10 @@ async function pay() {
     }
 
 
+    // ==============================================
+    // USER ID
+    // ==============================================
+
     const userId =
         tg.initDataUnsafe?.user?.id;
 
@@ -274,12 +343,16 @@ async function pay() {
     if (!userId) {
 
         tg.showAlert(
-            "Telegram user-ը չի գտնվել։"
+            "Telegram օգտատերը չի գտնվել։"
         );
 
         return;
     }
 
+
+    // ==============================================
+    // TOTAL
+    // ==============================================
 
     const total =
         selectedSeats.length *
@@ -297,15 +370,15 @@ async function pay() {
         payButton.disabled = true;
 
         payButton.textContent =
-            "⏳ Processing...";
+            "⏳ Մշակվում է...";
     }
 
 
     try {
 
-        // ==================================================
+        // ==========================================
         // TEST PAYMENT
-        // ==================================================
+        // ==========================================
 
         if (TEST_MODE) {
 
@@ -327,7 +400,7 @@ async function pay() {
                                 userId,
 
                             movie:
-                                "Avatar",
+                                selectedMovie,
 
                             session:
                                 selectedSession,
@@ -350,7 +423,7 @@ async function pay() {
 
                 tg.showAlert(
                     data.error ||
-                    "Test payment error."
+                    "Թեստային վճարման սխալ։"
                 );
 
                 return;
@@ -358,7 +431,10 @@ async function pay() {
 
 
             tg.showAlert(
-                "🧪 TEST PAYMENT\n\n" +
+                "🧪 ԹԵՍՏԱՅԻՆ ՎՃԱՐՈՒՄ\n\n" +
+                `🎬 ${selectedMovie}\n` +
+                `🕐 ${selectedSession}\n` +
+                `💺 ${selectedSeats.join(", ")}\n\n` +
                 "✅ Թեստը հաջողությամբ ավարտվեց։\n\n" +
                 "⭐ Իրական Stars չեն գանձվել։"
             );
@@ -368,9 +444,9 @@ async function pay() {
         }
 
 
-        // ==================================================
+        // ==========================================
         // REAL STARS PAYMENT
-        // ==================================================
+        // ==========================================
 
         const response =
             await fetch(
@@ -390,7 +466,7 @@ async function pay() {
                             userId,
 
                         movie:
-                            "Avatar",
+                            selectedMovie,
 
                         session:
                             selectedSession,
@@ -429,6 +505,10 @@ async function pay() {
             return;
         }
 
+
+        // ==========================================
+        // OPEN TELEGRAM INVOICE
+        // ==========================================
 
         tg.openInvoice(
             data.invoice_url,
@@ -477,7 +557,7 @@ async function pay() {
 
 
         tg.showAlert(
-            "❌ Payment server error."
+            "❌ Վճարման սերվերի սխալ։"
         );
 
 
@@ -489,7 +569,7 @@ async function pay() {
                 selectedSeats.length === 0;
 
             payButton.textContent =
-                `⭐ Pay ${total} Stars`;
+                `⭐ Վճարել ${total} Stars`;
         }
     }
 }
