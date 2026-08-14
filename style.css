@@ -1,25 +1,6 @@
- :root {
-    --bg: #0c0b0a;
-    --bg-raised: #131110;
-
-    --surface: rgba(245, 240, 230, 0.045);
-    --surface-hover: rgba(245, 240, 230, 0.08);
-    --border: rgba(245, 240, 230, 0.1);
-    --border-soft: rgba(245, 240, 230, 0.06);
-
-    --ink: #f4efe4;
-    --ink-dim: rgba(244, 239, 228, 0.58);
-    --ink-faint: rgba(244, 239, 228, 0.34);
-
-    --gold: #c9a24b;
-    --gold-bright: #e2c37a;
-    --gold-dim: rgba(201, 162, 75, 0.35);
-
-    --font-display: "Fraunces", Georgia, serif;
-    --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-
-    --ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
+/* ==================================================
+   RESET
+================================================== */
 
 * {
     margin: 0;
@@ -27,292 +8,410 @@
     box-sizing: border-box;
 }
 
+
+/* ==================================================
+   VARIABLES
+================================================== */
+
+:root {
+    --bg: #0b0b0b;
+    --bg-raised: #141414;
+    --bg-card: #1a1a1a;
+
+    --text: #f5f1e8;
+    --text-muted: #a7a29a;
+
+    --gold: #d6b25e;
+    --gold-light: #f0cf7a;
+    --gold-dim: #8f7436;
+
+    --border: rgba(255, 255, 255, 0.1);
+
+    --danger: #9b3d3d;
+
+    --font-main: "Inter", sans-serif;
+    --font-display: "Fraunces", serif;
+
+    --ease: cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+    );
+}
+
+
+/* ==================================================
+   BODY
+================================================== */
+
 html {
     scroll-behavior: smooth;
 }
 
+
 body {
     min-height: 100vh;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--font-body);
+
+    background:
+        radial-gradient(
+            circle at top,
+            #1d1b16 0%,
+            var(--bg) 45%
+        );
+
+    color: var(--text);
+
+    font-family: var(--font-main);
+
     overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
 }
 
 
-/* =========================
+/* ==================================================
    HEADER
-========================= */
+================================================== */
 
 .header {
     width: 100%;
-    height: 76px;
+    height: 75px;
+
+    padding: 0 8%;
 
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 
-    padding: 0 7%;
+    background:
+        rgba(11, 11, 11, 0.88);
 
-    background: rgba(12, 11, 10, 0.86);
-    border-bottom: 1px solid var(--border-soft);
+    border-bottom:
+        1px solid var(--border);
 
-    position: relative;
-    z-index: 10;
+    backdrop-filter: blur(15px);
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
 }
+
 
 .logo {
-    color: var(--ink);
     font-family: var(--font-display);
-    font-size: 21px;
-    font-weight: 600;
-    letter-spacing: 5px;
-    position: relative;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: var(--gold);
 }
 
-.logo::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 22px;
-    height: 2px;
-    background: var(--gold);
-}
 
 .user {
     display: flex;
     align-items: center;
-    gap: 10px;
 
-    color: var(--ink-dim);
-    font-size: 13px;
-    letter-spacing: 0.2px;
+    gap: 8px;
+
+    color: var(--text-muted);
+
+    font-size: 14px;
 }
+
 
 .user-icon {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
 
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+
+    background: var(--bg-raised);
+
+    border: 1px solid var(--border);
 
     border-radius: 50%;
-    border: 1px solid var(--gold-dim);
-
-    background: var(--surface);
 }
 
 
-/* =========================
+/* ==================================================
+   MAIN
+================================================== */
+
+main {
+    width: 100%;
+}
+
+
+/* ==================================================
    HERO
-========================= */
+================================================== */
 
 .hero {
-    min-height: 640px;
+    width: 100%;
+    min-height: 620px;
 
     position: relative;
 
-    display: flex;
-    align-items: center;
+    overflow: hidden;
 
     background:
         linear-gradient(
             90deg,
-            rgba(12, 11, 10, 0.98) 0%,
-            rgba(12, 11, 10, 0.86) 32%,
-            rgba(12, 11, 10, 0.42) 68%,
-            rgba(12, 11, 10, 0.92) 100%
+            rgba(0, 0, 0, 0.88),
+            rgba(0, 0, 0, 0.4)
         ),
-        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba")
-        center / cover no-repeat;
+        url("fullhouse.jpeg");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
 }
 
-.hero::after {
+
+.hero::before {
     content: "";
 
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
 
-    height: 200px;
+    inset: 0;
 
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        var(--bg)
-    );
-
-    pointer-events: none;
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 60%,
+            var(--bg)
+        );
 }
 
-.hero-content {
-    width: min(650px, 86%);
 
-    margin-left: 7%;
+.hero-content {
+    width: 90%;
+    max-width: 650px;
+
+    margin-left: 8%;
 
     position: relative;
     z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
+
 
 .badge {
     display: inline-flex;
-    align-items: center;
-    gap: 8px;
 
-    margin-bottom: 24px;
-    padding: 8px 16px;
+    margin-bottom: 20px;
 
-    border: 1px solid var(--gold-dim);
+    padding: 8px 15px;
+
+    border:
+        1px solid rgba(214, 178, 94, 0.5);
+
     border-radius: 50px;
 
-    background: rgba(201, 162, 75, 0.08);
+    background:
+        rgba(214, 178, 94, 0.08);
 
-    color: var(--gold-bright);
+    color: var(--gold-light);
 
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
 }
 
-.badge::before {
-    content: "";
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--gold-bright);
-}
 
-.hero h1 {
+.hero-content h1 {
+    margin-bottom: 18px;
+
     font-family: var(--font-display);
-    font-size: clamp(52px, 8vw, 104px);
-    line-height: 0.96;
 
-    font-weight: 600;
-    font-style: italic;
-    letter-spacing: -1px;
+    font-size: clamp(
+        55px,
+        8vw,
+        105px
+    );
 
-    margin-bottom: 24px;
+    line-height: 0.95;
+
+    color: var(--text);
 }
 
-.hero p {
-    max-width: 480px;
 
-    color: var(--ink-dim);
+.hero-content p {
+    max-width: 520px;
 
-    font-size: 16px;
+    margin-bottom: 30px;
+
+    color: var(--text-muted);
+
+    font-size: 18px;
+
     line-height: 1.7;
-    letter-spacing: 0.1px;
-
-    margin-bottom: 34px;
 }
 
-.hero button {
-    border: 1px solid var(--gold);
-    outline: none;
 
-    padding: 16px 30px;
+.hero-content button {
+    padding: 14px 28px;
 
-    border-radius: 4px;
+    border: none;
+
+    border-radius: 5px;
 
     background: var(--gold);
-    color: #16130c;
 
-    font-family: var(--font-body);
-    font-size: 13px;
+    color: #17130a;
+
+    font-family: var(--font-main);
+
+    font-size: 14px;
     font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
 
     cursor: pointer;
 
     transition:
-        transform 0.3s var(--ease),
-        box-shadow 0.3s var(--ease),
-        background 0.3s var(--ease);
-}
-
-.hero button:hover {
-    background: var(--gold-bright);
-    border-color: var(--gold-bright);
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 14px 34px rgba(201, 162, 75, 0.25);
-}
-
-.hero button:active {
-    transform: scale(0.97);
+        transform 0.25s var(--ease),
+        background 0.25s var(--ease);
 }
 
 
-/* =========================
+.hero-content button:hover {
+    transform: translateY(-3px);
+
+    background: var(--gold-light);
+}
+
+
+.hero-content button:active {
+    transform: translateY(0);
+}
+
+
+/* ==================================================
    MOVIES
-========================= */
+================================================== */
 
 .movies {
-    width: min(1100px, 86%);
+    width: 84%;
+
+    max-width: 1200px;
 
     margin: 0 auto;
 
-    padding: 90px 0;
+    padding: 90px 0 60px;
 }
 
-.movies h2,
-.seats-section h2 {
+
+.movies > h2 {
+    margin-bottom: 35px;
+
     font-family: var(--font-display);
-    font-size: 33px;
+
+    font-size: 42px;
+
     font-weight: 600;
 
-    margin-bottom: 34px;
-    letter-spacing: -0.5px;
+    color: var(--text);
 }
 
 
-/* =========================
+/* ==================================================
+   MOVIES GRID
+================================================== */
+
+.movies-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 28px;
+}
+
+
+/* ==================================================
    MOVIE CARD
-========================= */
+================================================== */
 
 .movie-card {
     width: 100%;
 
-    display: grid;
-    grid-template-columns: 300px 1fr;
+    display: flex;
+    flex-direction: column;
 
     overflow: hidden;
 
-    border: 1px solid var(--border);
-    border-radius: 6px;
-
     background: var(--bg-raised);
 
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+
     box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.45);
+        0 20px 60px
+        rgba(0, 0, 0, 0.35);
+
+    transition:
+        transform 0.3s var(--ease),
+        border-color 0.3s var(--ease),
+        box-shadow 0.3s var(--ease);
 }
 
-.movie-image {
-    min-height: 340px;
-    position: relative;
+
+.movie-card:hover {
+    transform: translateY(-7px);
+
+    border-color:
+        rgba(214, 178, 94, 0.5);
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, 0.55);
 }
+
+
+/* ==================================================
+   MOVIE IMAGE
+================================================== */
+
+.movie-image {
+    width: 100%;
+    height: 360px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
 
 .movie-image::after {
     content: "";
+
     position: absolute;
+
     inset: 0;
-    background: linear-gradient(
-        90deg,
-        rgba(12, 11, 10, 0) 60%,
-        var(--bg-raised) 100%
-    );
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 50%,
+            rgba(0, 0, 0, 0.45)
+        );
+
+    pointer-events: none;
 }
+
 
 .movie-image img {
     width: 100%;
@@ -321,371 +420,414 @@ body {
     display: block;
 
     object-fit: cover;
-    filter: saturate(0.92) contrast(1.03);
+
+    filter:
+        saturate(0.92)
+        contrast(1.05);
+
+    transition:
+        transform 0.6s var(--ease);
 }
 
+
+.movie-card:hover .movie-image img {
+    transform: scale(1.06);
+}
+
+
+/* ==================================================
+   MOVIE INFO
+================================================== */
+
 .movie-info {
-    padding: 40px 44px;
+    min-height: 210px;
+
+    padding: 28px;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+
+    justify-content: space-between;
 }
+
 
 .movie-info h3 {
-    font-family: var(--font-display);
-    font-size: 36px;
-    font-weight: 600;
     margin-bottom: 10px;
-}
 
-.movie-info > p {
-    color: var(--gold);
+    font-family: var(--font-display);
 
-    font-size: 12px;
+    font-size: 28px;
     font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
 
-    margin-bottom: 32px;
+    line-height: 1.2;
+
+    color: var(--text);
 }
 
 
-/* =========================
+.movie-info p {
+    margin-bottom: 25px;
+
+    color: var(--text-muted);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* ==================================================
    SESSIONS
-========================= */
+================================================== */
 
 .sessions {
     display: flex;
+
     flex-wrap: wrap;
 
     gap: 10px;
 }
 
+
 .sessions button {
-    min-width: 88px;
+    min-width: 75px;
 
-    padding: 13px 18px;
+    padding: 10px 15px;
 
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    border:
+        1px solid var(--border);
 
-    background: var(--surface);
-    color: var(--ink);
+    border-radius: 5px;
 
-    font-family: var(--font-body);
+    background: transparent;
+
+    color: var(--text-muted);
+
+    font-family: var(--font-main);
+
     font-size: 14px;
     font-weight: 600;
-    letter-spacing: 0.3px;
 
     cursor: pointer;
 
     transition:
         background 0.2s var(--ease),
+        color 0.2s var(--ease),
         border-color 0.2s var(--ease),
-        color 0.2s var(--ease);
+        transform 0.2s var(--ease);
 }
+
 
 .sessions button:hover {
-    background: var(--surface-hover);
+    color: var(--gold-light);
+
     border-color: var(--gold-dim);
+
+    transform: translateY(-2px);
 }
 
-.sessions button:active {
-    transform: scale(0.97);
-}
 
 .sessions button.active {
     background: var(--gold);
-    color: #16130c;
+
     border-color: var(--gold);
+
+    color: #16120a;
+
+    box-shadow:
+        0 5px 20px
+        rgba(214, 178, 94, 0.2);
 }
 
 
-/* =========================
+/* ==================================================
    SEATS SECTION
-========================= */
+================================================== */
 
 .seats-section {
-    width: min(1000px, 86%);
+    width: 84%;
+
+    max-width: 900px;
 
     margin: 0 auto;
 
-    padding: 70px 0 110px;
+    padding: 80px 0 100px;
+
+    text-align: center;
 }
+
+
+.seats-section h2 {
+    margin-bottom: 35px;
+
+    font-family: var(--font-display);
+
+    font-size: 40px;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   HIDDEN
+================================================== */
 
 .hidden {
     display: none;
 }
 
 
-/* =========================
+/* ==================================================
    SCREEN
-========================= */
+================================================== */
 
 .screen {
-    width: min(600px, 85%);
+    width: 75%;
 
-    height: 3px;
+    margin:
+        0 auto
+        40px;
 
-    margin: 0 auto 20px;
+    padding: 13px;
 
-    border-radius: 100px;
+    border-radius:
+        50% 50% 8px 8px;
 
-    background: linear-gradient(
-        90deg,
-        transparent,
-        var(--gold-dim) 15%,
-        var(--gold) 50%,
-        var(--gold-dim) 85%,
-        transparent
-    );
+    background:
+        linear-gradient(
+            to bottom,
+            #e9dfbd,
+            #8d7a47
+        );
+
+    color: #17130a;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 4px;
 
     box-shadow:
-        0 8px 30px rgba(201, 162, 75, 0.18);
-
-    color: transparent;
-
-    position: relative;
-}
-
-.screen::after {
-    content: "SCREEN";
-
-    position: absolute;
-
-    left: 50%;
-    top: 16px;
-
-    transform: translateX(-50%);
-
-    color: var(--ink-faint);
-
-    font-size: 10px;
-    letter-spacing: 4px;
+        0 15px 45px
+        rgba(214, 178, 94, 0.18);
 }
 
 
-/* =========================
+/* ==================================================
    LEGEND
-========================= */
+================================================== */
 
 .legend {
-    display: flex;
-    justify-content: center;
-    gap: 26px;
+    margin-bottom: 30px;
 
-    margin: 40px 0 34px;
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
 }
+
 
 .legend-item {
     display: flex;
     align-items: center;
-    gap: 8px;
 
-    color: var(--ink-faint);
-    font-size: 12px;
-    letter-spacing: 0.3px;
+    gap: 7px;
+
+    color: var(--text-muted);
+
+    font-size: 13px;
 }
 
+
 .legend-dot {
-    width: 10px;
-    height: 10px;
+    width: 13px;
+    height: 13px;
+
     border-radius: 3px;
 }
 
+
 .dot-available {
-    background: var(--surface-hover);
-    border: 1px solid var(--border);
+    background: #2b2b2b;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
 }
+
 
 .dot-selected {
     background: var(--gold);
 }
 
+
 .dot-taken {
-    background: rgba(245, 240, 230, 0.04);
-    border: 1px solid var(--border-soft);
+    background: var(--danger);
 }
 
 
-/* =========================
+/* ==================================================
    SEATS
-========================= */
+================================================== */
 
 .seats {
     width: 100%;
 
+    max-width: 650px;
+
+    margin: 0 auto 40px;
+
     display: grid;
 
-    grid-template-columns: repeat(8, minmax(25px, 1fr));
+    grid-template-columns:
+        repeat(6, 1fr);
 
-    gap: 12px;
-
-    max-width: 700px;
-
-    margin: 0 auto 55px;
+    gap: 13px;
 }
 
+
+/* ==================================================
+   SEAT
+================================================== */
+
 .seat {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1;
 
-    border-radius: 4px 4px 8px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    background: var(--surface);
+    background: #292929;
 
-    border: 1px solid var(--border);
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+    border-radius: 5px;
+
+    color: #aaa;
+
+    font-size: 13px;
+    font-weight: 600;
 
     cursor: pointer;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: var(--ink-faint);
-    font-size: 11px;
-    font-family: var(--font-body);
+    user-select: none;
 
     transition:
         transform 0.2s var(--ease),
         background 0.2s var(--ease),
-        border-color 0.2s var(--ease),
-        color 0.2s var(--ease);
+        color 0.2s var(--ease),
+        border-color 0.2s var(--ease);
 }
 
-.seat:hover {
+
+.seat:hover:not(.taken) {
     transform: translateY(-3px);
 
-    background: var(--surface-hover);
-    border-color: var(--gold-dim);
+    border-color: var(--gold);
 
-    color: var(--ink);
+    color: var(--gold-light);
 }
+
 
 .seat.selected {
     background: var(--gold);
 
     border-color: var(--gold);
 
-    color: #16130c;
-    font-weight: 700;
+    color: #18130a;
 
     box-shadow:
-        0 6px 22px rgba(201, 162, 75, 0.35);
+        0 5px 20px
+        rgba(214, 178, 94, 0.25);
 }
+
 
 .seat.taken {
-    background: rgba(245, 240, 230, 0.02);
+    background: #3d2020;
 
-    border-color: var(--border-soft);
+    border-color: #653333;
 
-    color: var(--ink-faint);
-    opacity: 0.3;
+    color: #805454;
 
     cursor: not-allowed;
-}
 
-.seat.taken:hover {
-    transform: none;
-    background: rgba(245, 240, 230, 0.02);
-    border-color: var(--border-soft);
+    opacity: 0.75;
 }
 
 
-/* =========================
-   SUMMARY — styled as a
-   physical ticket stub with
-   a perforated tear line
-========================= */
+/* ==================================================
+   SUMMARY
+================================================== */
 
 .summary {
-    max-width: 700px;
+    width: 100%;
+
+    max-width: 650px;
 
     margin: 0 auto;
 
-    padding: 26px 30px;
+    padding: 25px;
 
     display: flex;
-    align-items: center;
+    flex-direction: column;
+
+    gap: 14px;
+
+    background: var(--bg-raised);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+
+    text-align: left;
+}
+
+
+.summary p {
+    display: flex;
+
     justify-content: space-between;
 
     gap: 20px;
 
-    position: relative;
+    color: var(--text-muted);
 
-    border: 1px solid var(--border);
-    border-radius: 8px;
-
-    background: var(--bg-raised);
+    font-size: 14px;
 }
 
-.summary::before {
-    content: "";
-
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 176px;
-
-    width: 0;
-
-    border-left: 1px dashed var(--border);
-}
-
-.summary::after {
-    content: "";
-
-    position: absolute;
-    right: 168px;
-    top: 50%;
-
-    width: 16px;
-    height: 16px;
-
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 50%;
-
-    transform: translate(50%, -50%);
-}
-
-.summary p {
-    color: var(--ink-faint);
-
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
 
 .summary strong {
-    display: block;
+    color: var(--gold-light);
 
-    margin-top: 6px;
-
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 600;
-    text-transform: none;
-    letter-spacing: 0;
+    font-weight: 700;
 }
 
+
 #pay-button {
-    border: 1px solid var(--gold);
+    width: 100%;
 
-    padding: 15px 26px;
+    margin-top: 10px;
 
-    border-radius: 4px;
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 5px;
 
     background: var(--gold);
-    color: #16130c;
 
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    color: #17130a;
+
+    font-family: var(--font-main);
+
+    font-size: 15px;
+    font-weight: 800;
 
     cursor: pointer;
 
@@ -695,331 +837,242 @@ body {
         opacity 0.2s var(--ease);
 }
 
-#pay-button:not(:disabled):hover {
-    background: var(--gold-bright);
-    border-color: var(--gold-bright);
+
+#pay-button:hover:not(:disabled) {
     transform: translateY(-2px);
+
+    background: var(--gold-light);
 }
 
-#pay-button:disabled {
-    background: var(--surface);
-    border-color: var(--border);
-    color: var(--ink-faint);
 
-    opacity: 0.6;
+#pay-button:disabled {
+    opacity: 0.4;
 
     cursor: not-allowed;
 }
 
 
-/* =========================
+/* ==================================================
    TABLET
-========================= */
+================================================== */
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 
     .header {
         padding: 0 5%;
     }
 
-    .hero {
-        min-height: 580px;
-
-        background-position: center;
-    }
-
-    .hero-content {
-        margin-left: 5%;
-        width: 90%;
-    }
 
     .movies,
     .seats-section {
         width: 90%;
     }
 
-    .movie-card {
-        grid-template-columns: 220px 1fr;
+
+    .movies-grid {
+        gap: 18px;
     }
+
+
+    .movie-image {
+        height: 300px;
+    }
+
 
     .movie-info {
-        padding: 30px;
+        padding: 22px;
     }
+
 
     .movie-info h3 {
-        font-size: 29px;
+        font-size: 24px;
     }
-
-    .seats {
-        gap: 9px;
-    }
-
 }
 
 
-/* =========================
+/* ==================================================
    MOBILE
-========================= */
+================================================== */
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
 
     .header {
-        height: 64px;
-
-        padding:
-            0 18px;
+        height: 65px;
     }
+
 
     .logo {
-        font-size: 17px;
-        letter-spacing: 3px;
+        font-size: 22px;
+
+        letter-spacing: 2px;
     }
+
 
     .user {
         font-size: 12px;
     }
 
-    .user-icon {
-        width: 30px;
-        height: 30px;
-
-        font-size: 13px;
-    }
-
-
-    /* HERO */
 
     .hero {
-        min-height: 500px;
+        min-height: 540px;
 
-        align-items: flex-end;
-
-        padding-bottom: 65px;
-
-        background:
-            linear-gradient(
-                to bottom,
-                rgba(12, 11, 10, 0.2) 0%,
-                rgba(12, 11, 10, 0.68) 45%,
-                var(--bg) 100%
-            ),
-            url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba")
-            center / cover no-repeat;
+        background-position: center;
     }
+
 
     .hero-content {
-        width: calc(100% - 36px);
+        width: 90%;
 
-        margin: 0 18px;
-    }
-
-    .badge {
-        margin-bottom: 16px;
-
-        padding: 7px 12px;
-
-        font-size: 9px;
-    }
-
-    .hero h1 {
-        font-size: 54px;
-
-        letter-spacing: -0.5px;
-
-        margin-bottom: 16px;
-    }
-
-    .hero p {
-        font-size: 14px;
-
-        line-height: 1.55;
-
-        margin-bottom: 24px;
-    }
-
-    .hero button {
-        width: 100%;
-
-        padding: 16px;
+        margin-left: 5%;
     }
 
 
-    /* MOVIES */
+    .hero-content h1 {
+        font-size: 58px;
+    }
+
+
+    .hero-content p {
+        font-size: 15px;
+    }
+
 
     .movies {
-        width: calc(100% - 36px);
+        width: 90%;
 
-        padding: 60px 0;
-    }
-
-    .movies h2,
-    .seats-section h2 {
-        font-size: 26px;
-
-        margin-bottom: 22px;
+        padding:
+            60px 0
+            40px;
     }
 
 
-    /* MOVIE CARD */
+    .movies > h2 {
+        font-size: 34px;
 
-    .movie-card {
-        display: block;
-
-        border-radius: 6px;
+        margin-bottom: 25px;
     }
+
+
+    .movies-grid {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
 
     .movie-image {
-        height: 210px;
-
-        min-height: 0;
+        height: 260px;
     }
 
-    .movie-image::after {
-        background: linear-gradient(
-            to bottom,
-            rgba(12, 11, 10, 0) 55%,
-            var(--bg-raised) 100%
-        );
-    }
 
     .movie-info {
-        padding: 24px;
+        min-height: 0;
+
+        padding: 22px;
     }
+
 
     .movie-info h3 {
         font-size: 27px;
-
-        margin-bottom: 8px;
     }
 
-    .movie-info > p {
-        font-size: 11px;
-
-        margin-bottom: 24px;
-    }
-
-
-    /* SESSIONS */
-
-    .sessions {
-        width: 100%;
-
-        display: grid;
-
-        grid-template-columns: repeat(3, 1fr);
-
-        gap: 7px;
-    }
 
     .sessions button {
-        width: 100%;
+        flex: 1;
 
         min-width: 0;
 
-        padding: 12px 5px;
-
-        font-size: 12px;
+        padding: 11px 8px;
     }
 
-
-    /* SEATS */
 
     .seats-section {
-        width: calc(100% - 36px);
-
-        padding: 45px 0 75px;
-    }
-
-    .screen {
         width: 90%;
 
-        margin-bottom: 16px;
+        padding:
+            60px 0
+            80px;
     }
+
+
+    .seats-section h2 {
+        font-size: 32px;
+    }
+
+
+    .screen {
+        width: 95%;
+
+        font-size: 10px;
+
+        letter-spacing: 3px;
+    }
+
 
     .legend {
-        gap: 16px;
-        flex-wrap: wrap;
-
-        margin: 32px 0 26px;
+        gap: 12px;
     }
+
+
+    .legend-item {
+        font-size: 11px;
+    }
+
 
     .seats {
-        width: 100%;
-
-        grid-template-columns: repeat(8, 1fr);
-
-        gap: 6px;
-
-        margin-bottom: 38px;
+        gap: 8px;
     }
 
 
-    /* SUMMARY */
+    .seat {
+        font-size: 11px;
+
+        border-radius: 4px;
+    }
+
 
     .summary {
         padding: 20px;
-
-        flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 18px;
     }
-
-    .summary::before,
-    .summary::after {
-        display: none;
-    }
-
-    #pay-button {
-        width: 100%;
-
-        padding: 15px;
-    }
-
 }
 
 
-/* =========================
-   SMALL PHONES
-========================= */
+/* ==================================================
+   SMALL MOBILE
+================================================== */
 
-@media (max-width: 380px) {
+@media (max-width: 400px) {
 
-    .hero h1 {
-        font-size: 46px;
+    .hero-content h1 {
+        font-size: 48px;
     }
 
-    .hero p {
-        font-size: 13px;
+
+    .movie-image {
+        height: 220px;
     }
 
-    .movies,
-    .seats-section {
-        width: calc(100% - 28px);
+
+    .movie-info h3 {
+        font-size: 23px;
     }
 
-    .sessions button {
-        font-size: 11px;
-
-        padding: 11px 3px;
-    }
 
     .seats {
-        gap: 4px;
+        gap: 6px;
     }
 
-}
 
-
-/* =========================
-   VERY SMALL HEIGHT
-========================= */
-
-@media (max-height: 650px) and (max-width: 600px) {
-
-    .hero {
-        min-height: 440px;
+    .seat {
+        font-size: 10px;
     }
 
+
+    .legend {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        margin-left: 10%;
+    }
 }
