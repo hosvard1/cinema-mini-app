@@ -41,6 +41,122 @@ if (user) {
 
 
 // ==================================================
+// HERO SLIDESHOW
+// (was missing entirely — slides existed in HTML
+//  but nothing ever rotated or activated them)
+// ==================================================
+
+let heroSlideIndex = 0;
+let heroSlides = [];
+let heroDots = [];
+let heroTimer = null;
+
+const HERO_INTERVAL = 5000;
+
+
+function initHeroSlideshow() {
+
+    heroSlides =
+        Array.from(
+            document.querySelectorAll(".hero-slide")
+        );
+
+    const dotsContainer =
+        document.getElementById("hero-dots");
+
+    if (!heroSlides.length || !dotsContainer) {
+        return;
+    }
+
+
+    // ==============================================
+    // BUILD DOTS
+    // ==============================================
+
+    dotsContainer.innerHTML = "";
+
+    heroSlides.forEach(function (slide, index) {
+
+        const dot =
+            document.createElement("button");
+
+        dot.type = "button";
+
+        dot.className =
+            "hero-dot" + (index === 0 ? " active" : "");
+
+        dot.setAttribute(
+            "aria-label",
+            `Սլայդ ${index + 1}`
+        );
+
+        dot.onclick = function () {
+            goToHeroSlide(index);
+            restartHeroTimer();
+        };
+
+        dotsContainer.appendChild(dot);
+
+    });
+
+    heroDots =
+        Array.from(
+            dotsContainer.querySelectorAll(".hero-dot")
+        );
+
+
+    restartHeroTimer();
+}
+
+
+function goToHeroSlide(index) {
+
+    if (!heroSlides.length) {
+        return;
+    }
+
+    heroSlideIndex =
+        (index + heroSlides.length) % heroSlides.length;
+
+
+    heroSlides.forEach(function (slide, i) {
+
+        slide.classList.toggle(
+            "active",
+            i === heroSlideIndex
+        );
+
+    });
+
+
+    heroDots.forEach(function (dot, i) {
+
+        dot.classList.toggle(
+            "active",
+            i === heroSlideIndex
+        );
+
+    });
+}
+
+
+function nextHeroSlide() {
+    goToHeroSlide(heroSlideIndex + 1);
+}
+
+
+function restartHeroTimer() {
+
+    if (heroTimer) {
+        clearInterval(heroTimer);
+    }
+
+    heroTimer =
+        setInterval(nextHeroSlide, HERO_INTERVAL);
+}
+
+
+// ==================================================
 // MOVIE
 // ==================================================
 
@@ -101,9 +217,15 @@ function selectSession(time, buttonElement) {
 
     // ==============================================
     // REMOVE ACTIVE FROM ALL SESSION BUTTONS
+    // (was global — clicking a session on one movie
+    //  card cleared the active state on every other
+    //  movie card too; now scoped to this card)
     // ==============================================
 
-    document
+    const scope =
+        movieCard || document;
+
+    scope
         .querySelectorAll(".sessions button")
         .forEach(function (btn) {
 
@@ -528,6 +650,19 @@ async function pay() {
                         "✅ Վճարումը հաջողությամբ կատարվեց!"
                     );
 
+                    // ==================================
+                    // RESET STATE AFTER SUCCESSFUL PAYMENT
+                    // (was missing — seats stayed marked
+                    //  "selected" and payable again after
+                    //  a completed purchase)
+                    // ==================================
+
+                    selectedSeats = [];
+
+                    createSeats();
+
+                    updateSummary();
+
                 } else if (
                     status === "cancelled"
                 ) {
@@ -578,5 +713,7 @@ async function pay() {
 // ==================================================
 // INITIALIZE
 // ==================================================
+
+initHeroSlideshow();
 
 updateSummary();
