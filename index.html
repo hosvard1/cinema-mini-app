@@ -1,149 +1,647 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hy">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
-    <title>Cinema</title>
+
+    <title>Կինոթատրոն</title>
+
+
+    <!-- GOOGLE FONTS -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
     <link
         href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="style.css">
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
+
 <body>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
 <header class="header">
+
     <div class="logo">
-        CINEMA
+        ԿԻՆՈ
     </div>
+
+
     <div class="user">
-        <span class="user-icon">👤</span>
-        <span id="username">User</span>
+
+        <span class="user-icon">
+            👤
+        </span>
+
+        <span id="username">
+            Օգտատեր
+        </span>
+
     </div>
+
 </header>
+
+
+
 <main>
-    <!-- HERO -->
-    <section class="hero">
+
+
+<!-- ==================================================
+     HERO SLIDESHOW
+================================================== -->
+
+<section class="hero">
+
+
+    <!-- SLIDE 1 -->
+
+    <div class="hero-slide active">
+
+        <img
+            src="images/fullhouse.jpg"
+            alt="Ֆուլ Հաուս․ Վայրէջք"
+        >
+
+
         <div class="hero-content">
+
             <span class="badge">
-                NOW SHOWING
+                ՑՈՒՑԱԴՐՎՈՒՄ Է ՀԻՄԱ
             </span>
+
+
             <h1>
-                Avatar
+                Ֆուլ Հաուս․ Վայրէջք
             </h1>
+
+
             <p>
-                Experience the movie on the big screen.
+                Հայկական սիրված կատակերգությունը՝
+                մեծ էկրանին։
             </p>
+
+
             <button
                 type="button"
                 onclick="openMovie()"
             >
-                Buy Ticket
+                Գնել տոմս
             </button>
+
         </div>
-    </section>
-    <!-- MOVIES -->
-    <section class="movies">
-        <h2>
-            Movies
-        </h2>
+
+    </div>
+
+
+
+    <!-- SLIDE 2 -->
+
+    <div class="hero-slide">
+
+        <img
+            src="images/mer-bak.jpg"
+            alt="Մեր բակը"
+        >
+
+
+        <div class="hero-content">
+
+            <span class="badge">
+                ՀԱՅԿԱԿԱՆ ԿԻՆՈ
+            </span>
+
+
+            <h1>
+                Մեր բակը
+            </h1>
+
+
+            <p>
+                Սիրված հայկական կատակերգությունը՝
+                մեծ էկրանին։
+            </p>
+
+
+            <button
+                type="button"
+                onclick="openMovie()"
+            >
+                Գնել տոմս
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SLIDE 3 -->
+
+    <div class="hero-slide">
+
+        <img
+            src="images/kargin.jpg"
+            alt="Կարգին հաղորդում"
+        >
+
+
+        <div class="hero-content">
+
+            <span class="badge">
+                ՀԱՅԿԱԿԱՆ ԿԻՆՈ
+            </span>
+
+
+            <h1>
+                Կարգին հաղորդում
+            </h1>
+
+
+            <p>
+                Հայկական հումորի ամենասիրված
+                պատմությունները։
+            </p>
+
+
+            <button
+                type="button"
+                onclick="openMovie()"
+            >
+                Գնել տոմս
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+</section>
+
+
+
+<!-- ==================================================
+     MOVIES
+================================================== -->
+
+<section class="movies">
+
+
+    <h2>
+        Ֆիլմեր
+    </h2>
+
+
+    <div class="movies-grid">
+
+
+        <!-- ==================================================
+             MOVIE 1
+        ================================================== -->
+
         <div class="movie-card">
+
+
             <div class="movie-image">
+
                 <img
-                    src="fullhouse.jpeg"
-                    alt="Cinema"
+                    src="images/fullhouse.jpg"
+                    alt="Ֆուլ Հաուս․ Վայրէջք"
                 >
+
             </div>
+
+
             <div class="movie-info">
-                <h3>
-                    Ֆուլ Հաուս։Վայրէջք
-                </h3>
-                <p>
-                    Ժանր։ Արկածային կատակերգություն
-                </p>
+
+
+                <div>
+
+                    <h3>
+                        Ֆուլ Հաուս․ Վայրէջք
+                    </h3>
+
+
+                    <p>
+                        Ժանր․ Արկածային կատակերգություն
+                    </p>
+
+                </div>
+
+
                 <div class="sessions">
+
+
                     <button
                         type="button"
                         onclick="selectSession('18:00', this)"
                     >
                         18:00
                     </button>
+
+
                     <button
                         type="button"
                         onclick="selectSession('20:30', this)"
                     >
                         20:30
                     </button>
+
+
                     <button
                         type="button"
                         onclick="selectSession('23:00', this)"
                     >
                         23:00
                     </button>
+
+
                 </div>
+
+
             </div>
+
         </div>
-    </section>
+
+
+
+        <!-- ==================================================
+             MOVIE 2
+        ================================================== -->
+
+        <div class="movie-card">
+
+
+            <div class="movie-image">
+
+                <img
+                    src="images/mer-bak.jpg"
+                    alt="Մեր բակը"
+                >
+
+            </div>
+
+
+            <div class="movie-info">
+
+
+                <div>
+
+                    <h3>
+                        Մեր բակը
+                    </h3>
+
+
+                    <p>
+                        Ժանր․ Կատակերգություն
+                    </p>
+
+                </div>
+
+
+                <div class="sessions">
+
+
+                    <button
+                        type="button"
+                        onclick="selectSession('17:30', this)"
+                    >
+                        17:30
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="selectSession('20:00', this)"
+                    >
+                        20:00
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="selectSession('22:30', this)"
+                    >
+                        22:30
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             MOVIE 3
+        ================================================== -->
+
+        <div class="movie-card">
+
+
+            <div class="movie-image">
+
+                <img
+                    src="images/kargin.jpg"
+                    alt="Կարգին հաղորդում"
+                >
+
+            </div>
+
+
+            <div class="movie-info">
+
+
+                <div>
+
+                    <h3>
+                        Կարգին հաղորդում
+                    </h3>
+
+
+                    <p>
+                        Ժանր․ Հումորային
+                    </p>
+
+                </div>
+
+
+                <div class="sessions">
+
+
+                    <button
+                        type="button"
+                        onclick="selectSession('16:00', this)"
+                    >
+                        16:00
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="selectSession('19:00', this)"
+                    >
+                        19:00
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="selectSession('21:30', this)"
+                    >
+                        21:30
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             MOVIE 4
+        ================================================== -->
+
+        <div class="movie-card">
+
+
+            <div class="movie-image">
+
+                <img
+                    src="images/lost.jpg"
+                    alt="Կորած ճանապարհ"
+                >
+
+            </div>
+
+
+            <div class="movie-info">
+
+
+                <div>
+
+                    <h3>
+                        Կորած ճանապարհ
+                    </h3>
+
+
+                    <p>
+                        Ժանր․ Դրամա
+                    </p>
+
+                </div>
+
+
+                <div class="sessions">
+
+
+                    <button
+                        type="button"
+                        onclick="selectSession('15:30', this)"
+                    >
+                        15:30
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="selectSession('18:30', this)"
+                    >
+                        18:30
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="selectSession('21:00', this)"
+                    >
+                        21:00
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     SEATS
+================================================== -->
+
+<section
+    id="seats-section"
+    class="seats-section hidden"
+>
+
+
+    <h2>
+        Ընտրեք Ձեր տեղերը
+    </h2>
+
+
+    <div class="screen">
+        ԷԿՐԱՆ
+    </div>
+
+
+
+    <!-- LEGEND -->
+
+    <div class="legend">
+
+
+        <span class="legend-item">
+
+            <span
+                class="legend-dot dot-available"
+            ></span>
+
+            Ազատ
+
+        </span>
+
+
+        <span class="legend-item">
+
+            <span
+                class="legend-dot dot-selected"
+            ></span>
+
+            Ընտրված
+
+        </span>
+
+
+        <span class="legend-item">
+
+            <span
+                class="legend-dot dot-taken"
+            ></span>
+
+            Զբաղված
+
+        </span>
+
+
+    </div>
+
+
+
     <!-- SEATS -->
-    <section
-        id="seats-section"
-        class="seats-section hidden"
-    >
-        <h2>
-            Select your seats
-        </h2>
-        <div class="screen">
-            SCREEN
-        </div>
-        <div class="legend">
-            <span class="legend-item">
-                <span class="legend-dot dot-available"></span>
-                Available
-            </span>
-            <span class="legend-item">
-                <span class="legend-dot dot-selected"></span>
-                Selected
-            </span>
-            <span class="legend-item">
-                <span class="legend-dot dot-taken"></span>
-                Taken
-            </span>
-        </div>
-        <div
-            id="seats"
-            class="seats"
-        ></div>
-        <div class="summary">
-            <p>
-                Seats:
-                <strong id="selected-seats">
-                    —
-                </strong>
-            </p>
-            <p>
-                Total:
-                <strong id="total">
-                    0 ⭐
-                </strong>
-            </p>
-            <button
-                id="pay-button"
-                type="button"
-                onclick="pay()"
-                disabled
-            >
-                ⭐ Pay
-            </button>
-        </div>
-    </section>
+
+    <div
+        id="seats"
+        class="seats"
+    ></div>
+
+
+
+    <!-- SUMMARY -->
+
+    <div class="summary">
+
+
+        <p>
+
+            Տեղեր՝
+
+            <strong id="selected-seats">
+                —
+            </strong>
+
+        </p>
+
+
+        <p>
+
+            Ընդհանուր՝
+
+            <strong id="total">
+                0 ⭐
+            </strong>
+
+        </p>
+
+
+        <button
+            id="pay-button"
+            type="button"
+            onclick="pay()"
+            disabled
+        >
+            ⭐ Վճարել 0 Stars
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
 </main>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+
+
+<!-- ==================================================
+     TELEGRAM WEB APP
+================================================== -->
+
+<script
+    src="https://telegram.org/js/telegram-web-app.js"
+></script>
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
 <script src="script.js"></script>
+
+
 </body>
+
 </html>
