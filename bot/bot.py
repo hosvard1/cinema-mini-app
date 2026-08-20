@@ -31,7 +31,6 @@ WEB_APP_URL = "https://cinema-mini-app.vercel.app/"
 # ============================================================
 
 bot = Bot(token=TOKEN)
-
 dp = Dispatcher(bot)
 
 
@@ -42,11 +41,11 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=["start"])
 async def start_handler(message: types.Message):
 
-    keyboard = InlineKeyboardMarkup()
+    keyboard = InlineKeyboardMarkup(row_width=1)
 
     keyboard.add(
         InlineKeyboardButton(
-            text="🎬 Open CINEMA",
+            text="🎬 Բացել CINEMA",
             web_app=WebAppInfo(
                 url=WEB_APP_URL
             )
@@ -56,10 +55,38 @@ async def start_handler(message: types.Message):
     await message.answer(
         "🎬 Բարի գալուստ CINEMA!\n\n"
         "🍿 Ընտրիր ֆիլմը, սեանսը և քո տեղը։\n\n"
-        "🎟️ Տոմսը կարող ես գնել "
-        "Telegram Stars-ով։",
+        "🎟️ Տոմսը կարող ես գնել Telegram Stars-ով։",
         reply_markup=keyboard
     )
+
+
+# ============================================================
+# WEB APP DATA
+# ============================================================
+
+@dp.message_handler(content_types=types.ContentType.WEB_APP_DATA)
+async def web_app_data_handler(message: types.Message):
+
+    try:
+
+        data = json.loads(
+            message.web_app_data.data
+        )
+
+        print()
+        print("=" * 60)
+        print("WEB APP DATA")
+        print("=" * 60)
+        print(data)
+        print("=" * 60)
+        print()
+
+    except Exception as error:
+
+        print(
+            "WEB APP DATA ERROR:",
+            error
+        )
 
 
 # ============================================================
@@ -73,14 +100,26 @@ async def pre_checkout_handler(
 
     try:
 
+        print()
+        print("=" * 60)
+        print("PRE-CHECKOUT QUERY")
+        print("=" * 60)
+
+        print("ID:", query.id)
+        print("Currency:", query.currency)
+        print("Amount:", query.total_amount)
+        print("Payload:", query.invoice_payload)
+
+        print("=" * 60)
+        print()
+
         await bot.answer_pre_checkout_query(
-            query.id,
+            pre_checkout_query_id=query.id,
             ok=True
         )
 
         print(
-            "PRE-CHECKOUT APPROVED:",
-            query.id
+            "PRE-CHECKOUT APPROVED"
         )
 
     except Exception as error:
@@ -90,13 +129,30 @@ async def pre_checkout_handler(
             error
         )
 
+        try:
+
+            await bot.answer_pre_checkout_query(
+                pre_checkout_query_id=query.id,
+                ok=False,
+                error_message=(
+                    "Վճարումը հնարավոր չէ հաստատել։"
+                )
+            )
+
+        except Exception as second_error:
+
+            print(
+                "PRE-CHECKOUT RESPONSE ERROR:",
+                second_error
+            )
+
 
 # ============================================================
 # SUCCESSFUL PAYMENT
 # ============================================================
 
 @dp.message_handler(
-    content_types=["successful_payment"]
+    content_types=types.ContentType.SUCCESSFUL_PAYMENT
 )
 async def successful_payment_handler(
     message: types.Message
@@ -107,10 +163,19 @@ async def successful_payment_handler(
         payment = message.successful_payment
 
         # ----------------------------------------------------
-        # Basic payment information
+        # USER
         # ----------------------------------------------------
 
         user_id = message.from_user.id
+
+        username = (
+            message.from_user.username
+            or "No username"
+        )
+
+        # ----------------------------------------------------
+        # PAYMENT
+        # ----------------------------------------------------
 
         charge_id = (
             payment.telegram_payment_charge_id
@@ -124,14 +189,21 @@ async def successful_payment_handler(
             payment.invoice_payload
         )
 
+        currency = (
+            payment.currency
+        )
 
         # ----------------------------------------------------
-        # Parse invoice payload
+        # DEFAULT DATA
         # ----------------------------------------------------
 
         movie = "Cinema"
         session = "—"
         seats = []
+
+        # ----------------------------------------------------
+        # PARSE PAYLOAD
+        # ----------------------------------------------------
 
         try:
 
@@ -161,19 +233,41 @@ async def successful_payment_handler(
                 error
             )
 
+        # ----------------------------------------------------
+        # SEATS
+        # ----------------------------------------------------
+
+        if isinstance(seats, list):
+
+            seats_text = ", ".join(
+                map(str, seats)
+            )
+
+        else:
+
+            seats_text = str(seats)
+
+        if not seats_text:
+
+            seats_text = "—"
 
         # ----------------------------------------------------
-        # Console log
+        # LOG
         # ----------------------------------------------------
 
         print()
-        print("=" * 50)
+        print("=" * 70)
         print("PAYMENT SUCCESSFUL")
-        print("=" * 50)
+        print("=" * 70)
 
         print(
-            "User:",
+            "User ID:",
             user_id
+        )
+
+        print(
+            "Username:",
+            username
         )
 
         print(
@@ -188,12 +282,17 @@ async def successful_payment_handler(
 
         print(
             "Seats:",
-            seats
+            seats_text
         )
 
         print(
             "Stars:",
             total_stars
+        )
+
+        print(
+            "Currency:",
+            currency
         )
 
         print(
@@ -206,71 +305,61 @@ async def successful_payment_handler(
             payload
         )
 
-        print("=" * 50)
+        print("=" * 70)
         print()
 
-
         # ----------------------------------------------------
-        # Confirmation message
+        # CONFIRMATION
         # ----------------------------------------------------
-
-        seats_text = (
-            ", ".join(
-                map(str, seats)
-            )
-            if seats
-            else "—"
-        )
-
 
         confirmation_text = (
-
-            "✅ Ձեր վճարումը "
-            "հաջողությամբ կատարվել է։\n\n"
+            "✅ Վճարումը հաջողությամբ կատարվել է։\n\n"
 
             f"🎬 Ֆիլմ՝ {movie}\n"
-
             f"🕐 Սեանս՝ {session}\n"
+            f"💺 Տեղեր՝ {seats_text}\n\n"
 
-            f"💺 Տեղեր՝ {seats_text}\n"
-
-            f"⭐ Վճարված՝ "
-            f"{total_stars} Stars\n\n"
+            f"⭐ Վճարված՝ {total_stars} Stars\n\n"
 
             "🎟️ Ձեր տոմսը հաստատված է։"
         )
-
 
         await message.answer(
             confirmation_text
         )
 
-
         # ----------------------------------------------------
-        # Send QR
+        # QR
         # ----------------------------------------------------
 
         qr_url = (
             "https://cinema-mini-app.vercel.app/qr.png"
         )
 
+        try:
 
-        await bot.send_photo(
-            chat_id=message.chat.id,
-
-            photo=qr_url,
-
-            caption=(
-                "🎟️ Ձեր տոմսի QR կոդը"
+            await bot.send_photo(
+                chat_id=message.chat.id,
+                photo=qr_url,
+                caption="🎟️ Ձեր տոմսի QR կոդը"
             )
-        )
 
+            print(
+                "QR SENT:",
+                user_id
+            )
 
-        print(
-            "QR SENT TO USER:",
-            user_id
-        )
+        except Exception as qr_error:
 
+            print(
+                "QR ERROR:",
+                qr_error
+            )
+
+            await message.answer(
+                "⚠️ Վճարումը հաստատված է, "
+                "բայց QR կոդը ուղարկել չհաջողվեց։"
+            )
 
     except Exception as error:
 
@@ -281,10 +370,12 @@ async def successful_payment_handler(
 
 
 # ============================================================
-# HEALTH CHECK SERVER
+# HEALTH CHECK
 # ============================================================
 
-async def health_handler(request):
+async def health_handler(
+    request: web.Request
+):
 
     return web.json_response(
         {
@@ -293,6 +384,10 @@ async def health_handler(request):
         }
     )
 
+
+# ============================================================
+# WEB SERVER
+# ============================================================
 
 async def start_web_server():
 
@@ -308,13 +403,11 @@ async def start_web_server():
         health_handler
     )
 
-
     runner = web.AppRunner(
         app
     )
 
     await runner.setup()
-
 
     port = int(
         os.getenv(
@@ -323,22 +416,16 @@ async def start_web_server():
         )
     )
 
-
     site = web.TCPSite(
         runner,
-
         "0.0.0.0",
-
         port
     )
 
-
     await site.start()
 
-
     print(
-        f"🌐 Health server running "
-        f"on port {port}"
+        f"🌐 Health server running on port {port}"
     )
 
 
@@ -347,12 +434,13 @@ async def start_web_server():
 # ============================================================
 
 async def on_startup(
-    dispatcher
+    dispatcher: Dispatcher
 ):
 
-    print(
-        "🎬 CINEMA BOT STARTING..."
-    )
+    print()
+    print("=" * 60)
+    print("🎬 CINEMA BOT STARTING")
+    print("=" * 60)
 
     await start_web_server()
 
@@ -364,18 +452,23 @@ async def on_startup(
         "🤖 Telegram polling started"
     )
 
+    print("=" * 60)
+    print()
+
 
 # ============================================================
 # SHUTDOWN
 # ============================================================
 
 async def on_shutdown(
-    dispatcher
+    dispatcher: Dispatcher
 ):
 
     print(
         "🛑 CINEMA BOT STOPPING..."
     )
+
+    await bot.close()
 
 
 # ============================================================
@@ -389,12 +482,8 @@ if __name__ == "__main__":
     )
 
     executor.start_polling(
-
         dp,
-
         skip_updates=True,
-
         on_startup=on_startup,
-
         on_shutdown=on_shutdown
     )
